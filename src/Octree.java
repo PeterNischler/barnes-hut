@@ -19,7 +19,7 @@ public class Octree implements CosmicComponent{
     }
 
     public Boolean add(Body body){
-        if ()
+        if (body.getMassCenter().getX() <  )
         return false;
     }
 

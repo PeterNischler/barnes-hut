@@ -31,7 +31,7 @@ public class Simulation {
         double seconds = 0;
 
         // simulation loop
- /*       while(true) {
+        while(true) {
 
             seconds++; // each iteration computes the movement of the celestial bodies within one second.
 
