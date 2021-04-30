@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.Vector;
 
 // This class represents celestial bodies like stars, planets, asteroids, etc..
-public class Body {
+public class Body implements CosmicComponent{
 
     //TODO: change modifiers.
     private String name;
