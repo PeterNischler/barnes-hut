@@ -12,12 +12,14 @@ public class Octree implements CosmicComponent{
     private CosmicComponent eigthNode;
 
 
-
     public Octree (Body body){
         this.body = body;
+        this.mass = body.getMass();
+        this.position = body.getMassCenter();
     }
 
     public Boolean add(Body body){
+        if ()
         return false;
     }
 
@@ -28,4 +30,10 @@ public class Octree implements CosmicComponent{
     public String getName(){
         return body.getName();
     }
+
+    public int size(){
+        return 0;
+    }
+
+
 }
