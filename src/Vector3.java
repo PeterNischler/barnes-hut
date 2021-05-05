@@ -19,6 +19,9 @@ public class Vector3 {
         this.z = v.z;
     }
 
+    public Vector3 (){
+    }
+
     // Returns the sum of this vector and vector 'v'.
     public Vector3 plus(Vector3 v) {
         Vector3 result = new Vector3 (0, 0, 0);
