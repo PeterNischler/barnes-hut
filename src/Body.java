@@ -108,8 +108,8 @@ public class Body implements CosmicComponent{
     // checks if Body is inside of an cubical boundary
     public boolean insideOfBoundary (double diameter, Vector3 centre){
         Vector3 boundaryVector = position.minus(centre);
-        if (Math.abs(boundaryVector.getX()) > diameter || Math.abs(boundaryVector.getY()) > diameter
-                || Math.abs(boundaryVector.getY()) > diameter){
+        if (Math.abs(boundaryVector.getX()) > diameter/2 || Math.abs(boundaryVector.getY()) > diameter/2
+                || Math.abs(boundaryVector.getY()) > diameter/2){
             return true;
         }
         return false;
