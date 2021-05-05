@@ -4,9 +4,8 @@ import javax.management.ValueExp;
 import java.awt.*;
 
 public class Octree {
-
     private String name;
-    private Vector3 centre;
+    private Vector3 centre = new Vector3(0,0,0);
     private Vector3[] centreNodes = new Vector3[]{centre.plus(new Vector3(-Simulation.Diameter / 4, Simulation.Diameter / 4, Simulation.Diameter / 4)),
             centre.plus(new Vector3(Simulation.Diameter / 4, Simulation.Diameter / 4, Simulation.Diameter / 4)),
             centre.plus(new Vector3(-Simulation.Diameter / 4, Simulation.Diameter / 4, -Simulation.Diameter / 4)),
@@ -29,11 +28,24 @@ public class Octree {
         if (body.insideOfBoundary(Simulation.Diameter, centre) == false) {
             return false;
         }
+        for (int i = 0; i < 8; i++) {
+            if (body.insideOfBoundary(Simulation.Diameter / 2, centreNodes[i])) {
+                if (Nodes[i] == null){
+                    Nodes[i] = body;
+                    break;
+                } else if (Nodes[i] instanceof Body){
+                    CosmicComponent otherBody = Nodes[i];
+                    Nodes[i] = new OctreeNode();
+                    Nodes[i].add(body);
+                    Nodes[i].add(otherBody);
+                }
 
-        if (body.insideOfBoundary(Simulation.Diameter / 2, ))
+            }
+        }
 
-            //firstNode = body;
-            firstNode = new OctreeNode();
+
+        //firstNode = body;
+        firstNode = new OctreeNode();
         firstNode.add(body);
 
 
