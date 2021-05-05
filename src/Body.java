@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.Vector;
 
 // This class represents celestial bodies like stars, planets, asteroids, etc..
-public class Body implements CosmicComponent{
+public class Body{
 
     //TODO: change modifiers.
     private String name;
@@ -112,11 +112,6 @@ public class Body implements CosmicComponent{
                 || Math.abs(boundaryVector.getY()) > diameter/2){
             return true;
         }
-        return false;
-    }
-
-    @Override
-    public boolean add(Body body) {
         return false;
     }
 }
