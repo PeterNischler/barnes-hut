@@ -5,7 +5,7 @@ public class OctreeNode implements CosmicComponent {
     //1-4 bei y immer plus, 5-8 bei y immer minus
     //1,2,5,6 bei z plus, 3,4,7,8 bei z minus
     private double mass;
-    private Vector3[] centreNodes = new Vector3[]{        new Vector3(new Vector3(-diameter / 4, diameter / 4, diameter / 4)),
+    private Vector3[] centreNodes = new Vector3[]{new Vector3(new Vector3(-diameter / 4, diameter / 4, diameter / 4)),
             centre.plus(new Vector3(diameter / 4, diameter / 4, diameter / 4)),
             centre.plus(new Vector3(-diameter / 4, diameter / 4, -diameter / 4)),
             centre.plus(new Vector3(diameter / 4, diameter / 4, -diameter / 4)),
@@ -32,7 +32,7 @@ public class OctreeNode implements CosmicComponent {
                     Nodes[i] = new LeafNode(body);
                 } else if (Nodes[i] instanceof LeafNode) {
                     Body otherBody = Nodes[i].getBody();
-                    Nodes[i] = new OctreeNode();
+                    Nodes[i] = new OctreeNode(diameter / 2, centreNodes[i]);
                     Nodes[i].add(otherBody);
                 }
                 return Nodes[i].add(body);
@@ -42,10 +42,10 @@ public class OctreeNode implements CosmicComponent {
     }
 
     public Body getBody(String name) {
-        for (int i = 0; i < 8; i++){
-            if (Nodes[i] != null){
-                Body b =  Nodes[i].getBody(name);
-                if (b != null){
+        for (int i = 0; i < 8; i++) {
+            if (Nodes[i] != null) {
+                Body b = Nodes[i].getBody(name);
+                if (b != null) {
                     return b;
                 }
             }
