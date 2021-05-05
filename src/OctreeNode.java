@@ -4,6 +4,7 @@ public class OctreeNode implements CosmicComponent {
     //ungerade bei x minus, gerade x immer plus
     //1-4 bei y immer plus, 5-8 bei y immer minus
     //1,2,5,6 bei z plus, 3,4,7,8 bei z minus
+    private double mass;
     private Vector3[] centreNodes = new Vector3[]{        new Vector3(new Vector3(-diameter / 4, diameter / 4, diameter / 4)),
             centre.plus(new Vector3(diameter / 4, diameter / 4, diameter / 4)),
             centre.plus(new Vector3(-diameter / 4, diameter / 4, -diameter / 4)),

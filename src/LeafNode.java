@@ -12,6 +12,7 @@ public class LeafNode implements  CosmicComponent{
         if (body.getName().equals(name)){
             return body;
         }
+        else return null;
     }
     public Boolean add(Body body){
         return false;
