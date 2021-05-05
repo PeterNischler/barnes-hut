@@ -7,14 +7,14 @@ public class Octree {
 
     private String name;
     private Vector3 centre;
-    private Vector3[] centreNodes = new Vector3[]{centre.plus(new Vector3(-Simulation.Diameter / 2, Simulation.Diameter / 2, Simulation.Diameter / 2)),
-            centre.plus(new Vector3(Simulation.Diameter / 2, Simulation.Diameter / 2, Simulation.Diameter / 2)),
-            centre.plus(new Vector3(-Simulation.Diameter / 2, Simulation.Diameter / 2, -Simulation.Diameter / 2)),
-            centre.plus(new Vector3(Simulation.Diameter / 2, Simulation.Diameter / 2, -Simulation.Diameter / 2)),
-            centre.plus(new Vector3(-Simulation.Diameter / 2, -Simulation.Diameter / 2, Simulation.Diameter / 2)),
-            centre.plus(new Vector3(Simulation.Diameter / 2, -Simulation.Diameter / 2, Simulation.Diameter / 2)),
-            centre.plus(new Vector3(-Simulation.Diameter / 2, -Simulation.Diameter / 2, -Simulation.Diameter / 2)),
-            centre.plus(new Vector3(Simulation.Diameter / 2, -Simulation.Diameter / 2, -Simulation.Diameter / 2)),};
+    private Vector3[] centreNodes = new Vector3[]{centre.plus(new Vector3(-Simulation.Diameter / 4, Simulation.Diameter / 4, Simulation.Diameter / 4)),
+            centre.plus(new Vector3(Simulation.Diameter / 4, Simulation.Diameter / 4, Simulation.Diameter / 4)),
+            centre.plus(new Vector3(-Simulation.Diameter / 4, Simulation.Diameter / 4, -Simulation.Diameter / 4)),
+            centre.plus(new Vector3(Simulation.Diameter / 4, Simulation.Diameter / 4, -Simulation.Diameter / 4)),
+            centre.plus(new Vector3(-Simulation.Diameter / 4, -Simulation.Diameter / 4, Simulation.Diameter / 4)),
+            centre.plus(new Vector3(Simulation.Diameter / 4, -Simulation.Diameter / 4, Simulation.Diameter / 4)),
+            centre.plus(new Vector3(-Simulation.Diameter / 4, -Simulation.Diameter / 4, -Simulation.Diameter / 4)),
+            centre.plus(new Vector3(Simulation.Diameter / 4, -Simulation.Diameter / 4, -Simulation.Diameter / 4)),};
     private CosmicComponent firstNode;
     private CosmicComponent secondNode;
     private CosmicComponent thirdNode;
