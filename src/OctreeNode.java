@@ -1,5 +1,4 @@
 public class OctreeNode implements CosmicComponent {
-    private Body body;
     private Vector3 centre;
     private double diameter; //diameter of octant = edge length
     //ungerade bei x minus, gerade x immer plus
@@ -43,24 +42,13 @@ public class OctreeNode implements CosmicComponent {
 
     public Body getBody(String name) {
         for (int i = 0; i < 8; i++){
-            if (Nodes[i] instanceof LeafNode){
-                if (Nodes[i].getBody().getName().equals(name)){
-                    return Nodes[i].getBody();
+            if (Nodes[i] != null){
+                Body b =  Nodes[i].getBody(name);
+                if (b != null){
+                    return b;
                 }
-            } else {
-                return Nodes[i].get(name);
             }
         }
-        while
-        return false;
-    }
-
-    @Override
-    public String getName() {
-        return "n";
-    }
-    @Override
-    public String getName() {
-        return "n";
+        return null;
     }
 }

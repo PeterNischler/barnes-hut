@@ -42,12 +42,16 @@ public class Octree {
         return false;
     }
 
-    public Boolean getBody(String name) {
-        return false;
-    }
-
-    public Boolean getBody(int index) {
-        return false;
+    public Body getBody(String name) {
+        for (int i = 0; i < 8; i++){
+            if (Nodes[i] != null){
+                Body b =  Nodes[i].getBody(name);
+                if (b != null){
+                    return b;
+                }
+            }
+        }
+        return null;
     }
 
     public Boolean remove(Body body) {
