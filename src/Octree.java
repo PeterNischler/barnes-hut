@@ -15,14 +15,7 @@ public class Octree {
             centre.plus(new Vector3(Simulation.Diameter / 4, -Simulation.Diameter / 4, Simulation.Diameter / 4)),
             centre.plus(new Vector3(-Simulation.Diameter / 4, -Simulation.Diameter / 4, -Simulation.Diameter / 4)),
             centre.plus(new Vector3(Simulation.Diameter / 4, -Simulation.Diameter / 4, -Simulation.Diameter / 4)),};
-    private CosmicComponent firstNode;
-    private CosmicComponent secondNode;
-    private CosmicComponent thirdNode;
-    private CosmicComponent fourthNode;
-    private CosmicComponent fifthNode;
-    private CosmicComponent sixthNode;
-    private CosmicComponent seventhNode;
-    private CosmicComponent eighthNode;
+    private CosmicComponent[] Nodes;
 
 
     public Octree(String name) {
