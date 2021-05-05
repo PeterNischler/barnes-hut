@@ -5,20 +5,20 @@ public class OctreeNode implements CosmicComponent {
     //ungerade bei x minus, gerade x immer plus
     //1-4 bei y immer plus, 5-8 bei y immer minus
     //1,2,5,6 bei z plus, 3,4,7,8 bei z minus
-    private Vector3[] centreNodes = new Vector3[]{        new Vector3(centre.getX()-diameter/4, centre.getY()+diameter/4, centre.getZ()+diameter/4),
-            new Vector3(centre.getX()+diameter/4, centre.getY()+diameter/4, centre.getZ()+diameter/4),
-            new Vector3(centre.getX()-diameter/4, centre.getY()+diameter/4, centre.getZ()-diameter/4),
-            new Vector3(centre.getX()+diameter/4, centre.getY()+diameter/4, centre.getZ()-diameter/4),
-            new Vector3(centre.getX()-diameter/4, centre.getY()-diameter/4, centre.getZ()+diameter/4),
-            new Vector3(centre.getX()+diameter/4, centre.getY()-diameter/4, centre.getZ()+diameter/4),
-            new Vector3(centre.getX()-diameter/4, centre.getY()-diameter/4, centre.getZ()-diameter/4),
-            new Vector3(centre.getX()+diameter/4, centre.getY()-diameter/4, centre.getZ()-diameter/4),};
+    private Vector3[] centreNodes = new Vector3[]{        new Vector3(new Vector3(-diameter / 4, diameter / 4, diameter / 4)),
+            centre.plus(new Vector3(diameter / 4, diameter / 4, diameter / 4)),
+            centre.plus(new Vector3(-diameter / 4, diameter / 4, -diameter / 4)),
+            centre.plus(new Vector3(diameter / 4, diameter / 4, -diameter / 4)),
+            centre.plus(new Vector3(-diameter / 4, -diameter / 4, diameter / 4)),
+            centre.plus(new Vector3(diameter / 4, -diameter / 4, diameter / 4)),
+            centre.plus(new Vector3(-diameter / 4, -diameter / 4, -diameter / 4)),
+            centre.plus(new Vector3(diameter / 4, -diameter / 4, -diameter / 4)),};
     private CosmicComponent[] Nodes = new CosmicComponent[8];
     private Vector3 centreOfMass;
 
-    public OctreeNode(double d, Vector3 p) {
+    public OctreeNode(double d, Vector3 c) {
         diameter = d;
-        position = p;
+        centre = c;
     }
 
     @Override
@@ -27,7 +27,11 @@ public class OctreeNode implements CosmicComponent {
         double positionY = body.getMassCenter().getY();
         double positionZ = body.getMassCenter().getZ();
 
-
+        for (int i = 0; i < 8; i++){
+            if (body.insideOfBoundary(diameter/2, centreNodes[i])){
+                if (Nodes[])
+            }
+        }
         if (body.insideOfBoundary(diameter/2, firstNodeCentre){
             if (firstNode == null){
                 firstNode = new OctreeNode(diameter/2, firstNodeCentre);
