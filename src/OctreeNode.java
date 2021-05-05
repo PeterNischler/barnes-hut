@@ -22,25 +22,23 @@ public class OctreeNode implements CosmicComponent {
     }
 
     @Override
-    public boolean add(Body body) {
-        double positionX = body.getMassCenter().getX();
-        double positionY = body.getMassCenter().getY();
-        double positionZ = body.getMassCenter().getZ();
-
-        for (int i = 0; i < 8; i++){
-            if (body.insideOfBoundary(diameter/2, centreNodes[i])){
-                if (Nodes[])
+    public Boolean add(Body body) {
+        if (body.insideOfBoundary(diameter, centre) == false) {
+            return false;
+        }
+        for (int i = 0; i < 8; i++) {
+            if (body.insideOfBoundary(Simulation.Diameter / 2, centreNodes[i])) {
+                if (Nodes[i] == null) {
+                    Nodes[i] = new LeafNode(body);
+                } else if (Nodes[i] instanceof LeafNode) {
+                    Body otherBody = Nodes[i].getBody();
+                    Nodes[i] = new OctreeNode();
+                    Nodes[i].add(otherBody);
+                }
+                return Nodes[i].add(body);
             }
         }
-        if (body.insideOfBoundary(diameter/2, firstNodeCentre){
-            if (firstNode == null){
-                firstNode = new OctreeNode(diameter/2, firstNodeCentre);
-                firstNode.add(body);
-            } else if{
-                firstNode.add(body);
-            }
-        } else if ())
-
+        return false;
     }
 
     public Body getBody(String name) {

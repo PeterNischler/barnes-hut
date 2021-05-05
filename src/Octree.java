@@ -16,7 +16,6 @@ public class Octree {
             centre.plus(new Vector3(Simulation.Diameter / 4, -Simulation.Diameter / 4, -Simulation.Diameter / 4)),};
     private CosmicComponent[] Nodes = new CosmicComponent[8];
 
-
     public Octree(String name) {
         this.name = name;
     }
