@@ -22,15 +22,17 @@ public class OctreeNode implements CosmicComponent {
         double positionX = body.getMassCenter().getX();
         double positionY = body.getMassCenter().getY();
         double positionZ = body.getMassCenter().getZ();
-
-        Vector3 firstNodeCentre = new Vector3(position.getX()-diameter/4, position.getX()+diameter/4, position.getX()-diameter/4);
-        Vector3 secondNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
-        Vector3 thirdNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
-        Vector3 fourthNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
-        Vector3 fifthNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
-        Vector3 sixthNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
-        Vector3 seventhNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
-        Vector3 eigthNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
+        //ungerade bei x minus, gerade x immer plus
+        //1-4 bei y immer plus, 5-8 bei y immer minus
+        //1,2,5,6 bei z plus, 3,4,7,8 bei z minus
+        Vector3 firstNodeCentre = new Vector3(position.getX()-diameter/4, position.getY()+diameter/4, position.getZ()+diameter/4);
+        Vector3 secondNodeCentre = new Vector3(position.getX()+diameter/4, position.getY()+diameter/4, position.getZ()+diameter/4);
+        Vector3 thirdNodeCentre = new Vector3(position.getX()-diameter/4, position.getY()+diameter/4, position.getZ()-diameter/4);
+        Vector3 fourthNodeCentre = new Vector3(position.getX()+diameter/4, position.getY()+diameter/4, position.getZ()-diameter/4);
+        Vector3 fifthNodeCentre = new Vector3(position.getX()-diameter/4, position.getY()-diameter/4, position.getZ()+diameter/4);
+        Vector3 sixthNodeCentre = new Vector3(position.getX()+diameter/4, position.getY()-diameter/4, position.getZ()+diameter/4);
+        Vector3 seventhNodeCentre = new Vector3(position.getX()-diameter/4, position.getY()-diameter/4, position.getZ()-diameter/4);
+        Vector3 eigthNodeCentre = new Vector3(position.getX()+diameter/4, position.getY()-diameter/4, position.getZ()-diameter/4);
 
         if (body.insideOfBoundary(diameter/2, firstNodeCentre){
             if (firstNode == null){
