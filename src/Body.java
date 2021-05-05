@@ -109,7 +109,9 @@ public class Body implements CosmicComponent{
     public boolean insideOfBoundary (double diameter, Vector3 centre){
         Vector3 boundaryVector = position.minus(centre);
         if (Math.abs(boundaryVector.getX()) > diameter || Math.abs(boundaryVector.getY()) > diameter
-                || Math.abs(boundaryVector.getY()) > diameter)
+                || Math.abs(boundaryVector.getY()) > diameter){
+            return true;
+        }
         return false;
     }
 
