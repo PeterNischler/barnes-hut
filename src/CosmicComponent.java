@@ -2,7 +2,7 @@ public interface CosmicComponent {
 
    public Body getBody();
 
-   public Boolean add();
+   public Boolean add(Body body);
 
 
 }

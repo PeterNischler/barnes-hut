@@ -9,7 +9,7 @@ public class LeafNode implements  CosmicComponent{
         return body;
     }
 
-    public Boolean add(){
+    public Boolean add(Body body){
         return false;
     }
 }
