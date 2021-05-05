@@ -4,4 +4,12 @@ public class LeafNode implements  CosmicComponent{
     public LeafNode(Body body){
         this.body = body;
     }
+
+    public Body getBody(){
+        return body;
+    }
+
+    public Boolean add(){
+        return false;
+    }
 }

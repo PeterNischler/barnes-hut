@@ -41,4 +41,7 @@ public class OctreeNode implements CosmicComponent {
         } else if ())
 
     }
+    public Body getBody(){
+        return null;
+    }
 }
