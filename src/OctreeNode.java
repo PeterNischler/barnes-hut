@@ -16,11 +16,12 @@ public class OctreeNode implements CosmicComponent {
     private CosmicComponent[] Nodes = new CosmicComponent[8];
     private Vector3 centreOfMass;
 
-    public OctreeNode(double diameter, Vector3 centre) {
-        this.diameter = diameter;
-        this.centre = centre;
+    public OctreeNode(double d, Vector3 c) {
+        diameter = d;
+        centre = c;
     }
 
+    @Override
     public boolean add(Body body) {
         double positionX = body.getMassCenter().getX();
         double positionY = body.getMassCenter().getY();
@@ -43,5 +44,30 @@ public class OctreeNode implements CosmicComponent {
     }
     public Body getBody(){
         return null;
+    }
+}
+
+
+    public Boolean get(String name) {
+        for (int i = 0; i < 8; i++){
+            if (Nodes[i] instanceof LeafNode){
+                if (Nodes[i].getBody().getName().equals(name)){
+                    return Nodes[i].getBody();
+                }
+            } else {
+                return Nodes[i].get(name);
+            }
+        }
+        while
+        return false;
+    }
+
+    @Override
+    public String getName() {
+        return "n";
+    }
+    @Override
+    public String getName() {
+        return "n";
     }
 }
