@@ -13,7 +13,10 @@ public class Vector3 {
         this.z = z;
     }
 
-    public Vector3 (){
+    public Vector3 (Vector3 v){
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
     }
 
     // Returns the sum of this vector and vector 'v'.
@@ -36,10 +39,11 @@ public class Vector3 {
 
     // Returns the sum of this vector and -1*v.
     public Vector3 minus(Vector3 v) {
-        Vector3 result = new Vector3 (0, 0, 0);
-        result.x = this.x - v.x;
-        result.y = this.y - v.y;
-        result.z = this.z - v.z;
+        Vector3 result = new Vector3();
+        result.x = (this.x - v.x);
+        result.y = (this.y - v.y);
+        result.z = (this.z - v.z);
+
         return result;
     }
 

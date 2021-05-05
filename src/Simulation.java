@@ -6,7 +6,8 @@ public class Simulation {
     public static final double AU = 150e9;
 
     //dimension in all 3 axis of the CosmicCube
-    public static final double Cubeside = 8e12;
+    //One cosmicCube has length of diameter * 2
+    public static final double Diameter = 8e12;
 
     //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
     public static final double T = 0.0;
@@ -19,7 +20,12 @@ public class Simulation {
         Body mars = new Body("Mars",6.41712e23,3390e3,new Vector3(-1.010178e11,-2.043939e11,-1.591727E9),new Vector3(20651.98,-10186.67,-2302.79),StdDraw.RED);
 
 
-
+        Octree system = new Octree("a");
+        system.add(sun);
+        system.add(earth);
+        system.add(mercury);
+        system.add(venus);
+        system.add(mars);
         StdDraw.setCanvasSize(500, 500);
         StdDraw.setXscale(-2*AU,2*AU);
         StdDraw.setYscale(-2*AU,2*AU);
@@ -29,9 +35,9 @@ public class Simulation {
         double seconds = 0;
 
         // simulation loop
-        while(true) {
+        /*while(true) {
             //create new octree
-            Octree system = new Octree("system");
+            Octree system = new Octree("a");
             system.add(sun);
             system.add(earth);
             system.add(mercury);
@@ -48,7 +54,7 @@ public class Simulation {
                 forceOnBody[i] = new Vector3(); // begin with zero
 
                 //iter over tree
-                system.getFirstNode()
+                system.
                 for (int j = 0; j < system.size(); j++) {
                     if (i == j) continue;
 
@@ -81,7 +87,7 @@ public class Simulation {
     }
     private Vector3[] calcForceOnBody(Octree system){
         if (system.)
-        return new Vector3[];
+        return new Vector3[];*/
     }
 
 }

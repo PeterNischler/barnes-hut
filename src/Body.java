@@ -105,10 +105,17 @@ public class Body implements CosmicComponent{
         this.forceOnBody = forceOnBody;
     }
 
-    public boolean add(CosmicComponent cc){
-        //should not be here but must be because of interface,
+    // checks if Body is inside of an cubical boundary
+    public boolean insideOfBoundary (double diameter, Vector3 centre){
+        Vector3 boundaryVector = position.minus(centre);
+        if (Math.abs(boundaryVector.getX()) > diameter || Math.abs(boundaryVector.getY()) > diameter
+                || Math.abs(boundaryVector.getY()) > diameter)
         return false;
     }
 
+    @Override
+    public boolean add(Body body) {
+        return false;
+    }
 }
 
