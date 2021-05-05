@@ -16,9 +16,9 @@ public class OctreeNode implements CosmicComponent {
     private CosmicComponent[] Nodes = new CosmicComponent[8];
     private Vector3 centreOfMass;
 
-    public OctreeNode(double d, Vector3 c) {
-        diameter = d;
-        centre = c;
+    public OctreeNode(double diameter, Vector3 centre) {
+        this.diameter = diameter;
+        this.centre = centre;
     }
 
     @Override
@@ -42,13 +42,8 @@ public class OctreeNode implements CosmicComponent {
         } else if ())
 
     }
-    public Body getBody(){
-        return null;
-    }
-}
 
-
-    public Boolean get(String name) {
+    public Body getBody(String name) {
         for (int i = 0; i < 8; i++){
             if (Nodes[i] instanceof LeafNode){
                 if (Nodes[i].getBody().getName().equals(name)){
