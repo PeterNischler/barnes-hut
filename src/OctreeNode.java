@@ -12,8 +12,9 @@ public class OctreeNode implements CosmicComponent {
     private Vector3 centreOfMass;
     private double diameter; //diameter of octant = edge length
 
-    public OctreeNode(double d) {
+    public OctreeNode(double d, Vector3 p) {
         diameter = d;
+        position = p;
     }
 
     @Override
@@ -22,10 +23,23 @@ public class OctreeNode implements CosmicComponent {
         double positionY = body.getMassCenter().getY();
         double positionZ = body.getMassCenter().getZ();
 
-        Vector3 firstNodeCentre = new Vector3(position.getX()+diameter/2, );
-        if (body.insideOfBoundary(diameter, position){
+        Vector3 firstNodeCentre = new Vector3(position.getX()-diameter/4, position.getX()+diameter/4, position.getX()-diameter/4);
+        Vector3 secondNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
+        Vector3 thirdNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
+        Vector3 fourthNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
+        Vector3 fifthNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
+        Vector3 sixthNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
+        Vector3 seventhNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
+        Vector3 eigthNodeCentre = new Vector3(position.getX()+diameter/4, position.getX()+diameter/4, position.getX()+diameter/4);
 
-        }
+        if (body.insideOfBoundary(diameter/2, firstNodeCentre){
+            if (firstNode == null){
+                firstNode = new OctreeNode(diameter/2, firstNodeCentre);
+                firstNode.add(body);
+            } else if{
+                firstNode.add(body);
+            }
+        } else if ())
 
     }
 
