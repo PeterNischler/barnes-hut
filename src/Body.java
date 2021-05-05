@@ -105,5 +105,10 @@ public class Body implements CosmicComponent{
         this.forceOnBody = forceOnBody;
     }
 
+    public boolean add(CosmicComponent cc){
+        //should not be here but must be because of interface,
+        return false;
+    }
+
 }
 

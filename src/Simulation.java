@@ -6,7 +6,10 @@ public class Simulation {
     public static final double AU = 150e9;
 
     //dimension in all 3 axis of the CosmicCube
-    public static final double CubeSide = 10e12;
+    public static final double Cubeside = 8e12;
+
+    //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
+    public static final double T = 0.0;
 
     public static void main(String[] args) {
         Body sun = new Body("Sol", 1.989e30, 696340e3, new Vector3(), new Vector3(), StdDraw.YELLOW);
@@ -15,13 +18,8 @@ public class Simulation {
         Body venus = new Body("Venus",4.86747e24,6052e3,new Vector3(-1.707667e10,1.066132e11,2.450232e9),new Vector3(-34446.02,-5567.47,2181.10),StdDraw.PINK);
         Body mars = new Body("Mars",6.41712e23,3390e3,new Vector3(-1.010178e11,-2.043939e11,-1.591727E9),new Vector3(20651.98,-10186.67,-2302.79),StdDraw.RED);
 
-        Octree system = new Octree(sun);
-        system.add(earth);
-        system.add(mercury);
-        system.add(venus);
-        system.add(mars);
 
-        Vector3[] forceOnBody = new Vector3[system.size()];
+
         StdDraw.setCanvasSize(500, 500);
         StdDraw.setXscale(-2*AU,2*AU);
         StdDraw.setYscale(-2*AU,2*AU);
@@ -32,14 +30,28 @@ public class Simulation {
 
         // simulation loop
         while(true) {
+            //create new octree
+            Octree system = new Octree("system");
+            system.add(sun);
+            system.add(earth);
+            system.add(mercury);
+            system.add(venus);
+            system.add(mars);
+
+
+            Vector3[] forceOnBody = new Vector3[system.size()];
 
             seconds++; // each iteration computes the movement of the celestial bodies within one second.
 
             // for each body (with index i): compute the total force exerted on it.
             for (int i = 0; i < system.size(); i++) {
                 forceOnBody[i] = new Vector3(); // begin with zero
+
+                //iter over tree
+                system.getFirstNode()
                 for (int j = 0; j < system.size(); j++) {
                     if (i == j) continue;
+
                     Vector3 forceToAdd = system.get(i).gravitationalForce(system.get(j));
                     forceOnBody[i] = forceOnBody[i].plus(forceToAdd);
                 }
@@ -65,7 +77,11 @@ public class Simulation {
                 StdDraw.show();
             }
 
-        }*/
+        }
+    }
+    private Vector3[] calcForceOnBody(Octree system){
+        if (system.)
+        return new Vector3[];
     }
 
 }
