@@ -4,5 +4,4 @@ public class LeafNode implements  CosmicComponent{
     public LeafNode(Body body){
         this.body = body;
     }
-
 }

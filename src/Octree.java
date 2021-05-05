@@ -31,9 +31,9 @@ public class Octree {
         for (int i = 0; i < 8; i++) {
             if (body.insideOfBoundary(Simulation.Diameter / 2, centreNodes[i])) {
                 if (Nodes[i] == null){
-                    Nodes[i] = body;
+                    Nodes[i] = new LeafNode(body);
                     break;
-                } else if (Nodes[i] instanceof Body){
+                } else if (Nodes[i] instanceof LeafNode){
                     CosmicComponent otherBody = Nodes[i];
                     Nodes[i] = new OctreeNode();
                     Nodes[i].add(body);
