@@ -52,12 +52,25 @@ public class Simulation {
                 forceOnBody[i] = system.calcForceOnBody(bodies[i]);
                 System.out.println(forceOnBody[i]);
             }
-            StdDraw.setPenColor(Color.WHITE);
-            StdDraw.square(0, 0 , Diameter/10*9);
-            system.drawTree2D();
 
+            //system.drawTree2D();
 
+            // for each body (with index i): move it according to the total force exerted on it.
+            for (int i = 0; i < system.size(); i++) {
+                bodies[i].move(forceOnBody[i]);
+            }
 
+            // show all movements in StdDraw canvas only every 3 hours (to speed up the simulation)
+            if (seconds%(3*3600) == 0) {
+                // clear old positions (exclude the following line if you want to draw orbits).
+                StdDraw.clear(StdDraw.BLACK);
+
+                // draw new positions
+                for (int i = 0; i < system.size(); i++) {
+                    bodies[i].draw();
+                }
+
+            }
             // show new positions
             StdDraw.show();
 

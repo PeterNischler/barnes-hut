@@ -57,6 +57,7 @@ public class Body{
         double force = Simulation.G * this.mass * mass / (distance * distance);
         return direction.times(force);
     }
+
     // Moves this body to a new position, according to the specified force vector 'force' exerted
     // on it, and updates the current movement accordingly.
     // (Movement depends on the mass of this body, its current movement and the exerted force)
