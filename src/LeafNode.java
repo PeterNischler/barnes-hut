@@ -17,6 +17,7 @@ public class LeafNode implements  CosmicComponent{
 
     //calculates the gravitational force exerted by this body on body
     public Vector3 calcForceOnBody(Body body){
+        System.out.println(body.gravitationalForce(this.body));
         return body.gravitationalForce(this.body);
     }
 

@@ -37,7 +37,11 @@ public class Simulation {
         double seconds = 0;
 
         // simulation loop
-        while(seconds < 1) {
+        while(true) {
+            seconds++; // each iteration computes the movement of the celestial bodies within one second.
+            if (seconds > 2){
+                break;
+            }
             //create new octree and add bodies
             Octree system = new Octree("system");
             for (int i = 0; i < bodies.length; i++){
@@ -45,10 +49,9 @@ public class Simulation {
                 bodies[i].getMassCenter().drawAsDot(AU/10, Color.RED);
             }
 
-            // calc force on bodies
+            // calc force on bodies and put results in array
             Vector3[] forceOnBody = new Vector3[bodies.length];
             for (int i = 0; i < bodies.length; i++){
-
                 forceOnBody[i] = system.calcForceOnBody(bodies[i]);
                 System.out.println(forceOnBody[i]);
             }
@@ -74,7 +77,6 @@ public class Simulation {
             // show new positions
             StdDraw.show();
 
-            seconds++; // each iteration computes the movement of the celestial bodies within one second.
 
  /*           // for each body (with index i): compute the total force exerted on it.
             for (int i = 0; i < system.size(); i++) {
@@ -87,25 +89,7 @@ public class Simulation {
                     forceOnBody[i] = forceOnBody[i].plus(forceToAdd);
                 }
             }
-            // now forceOnBody[i] holds the force vector exerted on body with index i.
-
-            // for each body (with index i): move it according to the total force exerted on it.
-            for (int i = 0; i < system.size(); i++) {
-                system.get(i).move(forceOnBody[i]);
-            }
-
-            // show all movements in StdDraw canvas only every 3 hours (to speed up the simulation)
-            if (seconds%(3*3600) == 0) {
-                // clear old positions (exclude the following line if you want to draw orbits).
-                StdDraw.clear(StdDraw.BLACK);
-
-                // draw new positions
-                for (int i = 0; i < system.size(); i++) {
-                    system.get(i).draw();
-                }
-
-            }*/
-
+*/
         }
     }
 

@@ -69,7 +69,6 @@ public class Octree {
         for (int i = 0; i < 8; i++){
             if (nodes[i] != null){
                 StdDraw.setPenColor(StdDraw.WHITE);
-                System.out.println(centreNodes[i].getX());
                 StdDraw.square(centreNodes[i].getX(), centreNodes[i].getY(), diameter/4);
             }
         }
