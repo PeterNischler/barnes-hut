@@ -38,27 +38,28 @@ public class OctreeNode implements CosmicComponent {
                     nodes[i].add(otherBody);
                 }
                 boolean returnValue = nodes[i].add(body);
-                calculateMass();
-                calculateCentreOfMass();
+                calculateCentreOfMass(body);
+                calculateMass(body);
                 return returnValue;
             }
         }
         return false;
     }
 
-
-    public void calculateMass(){
-        double newMass = 0;
+    // calculates new Mass of the OctreeNode after adding body
+    public void calculateMass(Body body){
+        /*double newMass = 0;
         for (int i = 0; i < 8; i++) {
             if (nodes[i] != null){
                 newMass += nodes[i].getMass();
             }
-        }
-        mass = newMass;
+        }*/
+        mass = mass + body.getMass();
     }
 
-    public void calculateCentreOfMass(){
-
+    // calculate new calculateCentreOfMass
+    public void calculateCentreOfMass(Body body){
+        centreOfMass = centreOfMass.times(mass).plus(body.getMassCenter().times(body.getMass())).times(1/(mass * body.getMass()));
     }
 
     public Vector3 calcForceOnBody(Body body){
