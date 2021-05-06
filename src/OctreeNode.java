@@ -6,7 +6,7 @@ public class OctreeNode implements CosmicComponent {
     //1,2,5,6 bei z plus, 3,4,7,8 bei z minus
     private double mass;
     private Vector3[] centreNodes;
-    private CosmicComponent[] Nodes = new CosmicComponent[8];
+    private CosmicComponent[] nodes = new CosmicComponent[8];
     private Vector3 centreOfMass;
 
     public OctreeNode(double diameter, Vector3 centre) {
@@ -32,15 +32,15 @@ public class OctreeNode implements CosmicComponent {
             return false;
         }
         for (int i = 0; i < 8; i++) {
-            if (body.insideOfBoundary(Simulation.Diameter / 2, centreNodes[i])) {
-                if (Nodes[i] == null) {
-                    Nodes[i] = new LeafNode(body);
-                } else if (Nodes[i] instanceof LeafNode) {
-                    Body otherBody = Nodes[i].getBody();
-                    Nodes[i] = new OctreeNode(diameter / 2, centreNodes[i]);
-                    Nodes[i].add(otherBody);
+            if (body.insideOfBoundary(diameter / 2, centreNodes[i])) {
+                if (nodes[i] == null) {
+                    nodes[i] = new LeafNode();
+                } else if (nodes[i] instanceof LeafNode) {
+                    Body otherBody = nodes[i].getBody();
+                    nodes[i] = new OctreeNode(diameter / 2, centreNodes[i]);
+                    nodes[i].add(otherBody);
                 }
-                return Nodes[i].add(body);
+                return nodes[i].add(body);
             }
         }
         return false;
@@ -53,11 +53,11 @@ public class OctreeNode implements CosmicComponent {
         }
         Vector3 v = new Vector3();
         for (int i = 0; i < 8; i++){
-            if (Nodes[i] != null){
+            if (nodes[i] != null){
                 if ((diameter / centreNodes[i].distance(body.getMassCenter())) < Simulation.T){
                     //gruppe zsm fassen
                 }
-                v = v.plus(Nodes[i].calcForceOnBody(body));;
+                v = v.plus(nodes[i].calcForceOnBody(body));;
             }
         }
         return v;

@@ -15,7 +15,7 @@ public class Octree {
             centre.plus(new Vector3(Simulation.Diameter / 4, -Simulation.Diameter / 4, Simulation.Diameter / 4)),
             centre.plus(new Vector3(-Simulation.Diameter / 4, -Simulation.Diameter / 4, -Simulation.Diameter / 4)),
             centre.plus(new Vector3(Simulation.Diameter / 4, -Simulation.Diameter / 4, -Simulation.Diameter / 4)),};
-    private CosmicComponent[] Nodes = new CosmicComponent[8];
+    private CosmicComponent[] nodes = new CosmicComponent[8];
 
     public Octree(String name) {
         this.name = name;
@@ -31,14 +31,14 @@ public class Octree {
         }
         for (int i = 0; i < 8; i++) {
             if (body.insideOfBoundary(diameter/ 2, centreNodes[i])) {
-                if (Nodes[i] == null) {
-                    Nodes[i] = new LeafNode();
-                } else if (Nodes[i] instanceof LeafNode) {
-                    Body otherBody = Nodes[i].getBody();
-                    Nodes[i] = new OctreeNode( diameter / 2, centreNodes[i]);
-                    Nodes[i].add(otherBody);
+                if (nodes[i] == null) {
+                    nodes[i] = new LeafNode();
+                } else if (nodes[i] instanceof LeafNode) {
+                    Body otherBody = nodes[i].getBody();
+                    nodes[i] = new OctreeNode( diameter / 2, centreNodes[i]);
+                    nodes[i].add(otherBody);
                 }
-                return Nodes[i].add(body);
+                return nodes[i].add(body);
             }
         }
         return false;
@@ -47,8 +47,8 @@ public class Octree {
     public Vector3 calcForceOnBody(Body body){
         Vector3 v = new Vector3();
         for (int i = 0; i < 8; i++){
-            if (Nodes[i] != null){
-                v = v.plus(Nodes[i].calcForceOnBody(body));;
+            if (nodes[i] != null){
+                v = v.plus(nodes[i].calcForceOnBody(body));;
             }
         }
         return v;

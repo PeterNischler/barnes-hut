@@ -22,7 +22,7 @@ public class Simulation {
         Body[] bodies = new Body[]{sun, earth, mercury, venus, mars};
 
 
-        if (mercury.insideOfBoundary(Diameter, new Vector3(0,0,0)) == false){
+        if (earth.insideOfBoundary(Diameter, new Vector3(0,0,0)) == false){
             System.exit(0);
         }
 
