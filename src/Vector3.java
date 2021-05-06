@@ -20,6 +20,9 @@ public class Vector3 {
     }
 
     public Vector3 (){
+        this.x = 0.0;
+        this.y = 0.0;
+        this.z = 0.0;
     }
 
     // Returns the sum of this vector and vector 'v'.

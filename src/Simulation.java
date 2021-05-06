@@ -10,7 +10,7 @@ public class Simulation {
     public static final double Diameter = 8e12;
 
     //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
-    public static final double T = 0.0;
+    public static final double T = 1.0;
 
     public static void main(String[] args) {
         Body sun = new Body("Sol", 1.989e30, 696340e3, new Vector3(), new Vector3(), StdDraw.YELLOW);
@@ -32,11 +32,10 @@ public class Simulation {
         double seconds = 0;
 
         // simulation loop
-        while(true) {
+        while(seconds < 1) {
             //create new octree and add bodies
             Octree system = new Octree("system");
             for (int i = 0; i < bodies.length; i++){
-
                 System.out.println(system.add(bodies[i]));
             }
 
@@ -49,10 +48,10 @@ public class Simulation {
             }
 
 
-/*
+
             seconds++; // each iteration computes the movement of the celestial bodies within one second.
 
-            // for each body (with index i): compute the total force exerted on it.
+ /*           // for each body (with index i): compute the total force exerted on it.
             for (int i = 0; i < system.size(); i++) {
                 forceOnBody[i] = new Vector3(); // begin with zero
 
