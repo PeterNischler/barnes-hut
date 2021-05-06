@@ -47,6 +47,16 @@ public class Body{
         return direction.times(force);
     }
 
+    public Vector3 gravitationalForce(double mass, Vector3 position) {
+        if (this.position == position){
+            return new Vector3(0,0,0);
+        }
+        Vector3 direction = position.minus(this.position);
+        double distance = direction.length();
+        direction.normalize();
+        double force = Simulation.G * this.mass * mass / (distance * distance);
+        return direction.times(force);
+    }
     // Moves this body to a new position, according to the specified force vector 'force' exerted
     // on it, and updates the current movement accordingly.
     // (Movement depends on the mass of this body, its current movement and the exerted force)

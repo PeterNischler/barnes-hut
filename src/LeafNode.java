@@ -25,9 +25,16 @@ public class LeafNode implements  CosmicComponent{
         return true;
     }
     public void drawTree2D(){
+
     }
 
-    public double getMass(){
+    @Override
+    public double getMass() {
         return body.getMass();
+    }
+
+    @Override
+    public Vector3 getCentre() {
+        return body.getMassCenter();
     }
 }

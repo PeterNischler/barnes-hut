@@ -21,10 +21,7 @@ public class OctreeNode implements CosmicComponent {
                 centre.plus(new Vector3(diameter / 4, -diameter / 4, -diameter / 4)),};
     }
 
-    @Override
-    public Body getBody() {
-        return null;
-    }
+
 
     @Override
     public Boolean add(Body body) {
@@ -60,10 +57,6 @@ public class OctreeNode implements CosmicComponent {
         mass = newMass;
     }
 
-    public double getMass(){
-        return mass;
-    }
-
     public void calculateCentreOfMass(){
 
     }
@@ -73,10 +66,12 @@ public class OctreeNode implements CosmicComponent {
             return centre.times(mass);
         }
         Vector3 force = new Vector3();
+        //iterates over all 8 nodes. if d/r<T there is no recursive call and the
         for (int i = 0; i < 8; i++){
             if (nodes[i] != null){
+
                 if ((diameter / centreNodes[i].distance(body.getMassCenter())) < Simulation.T){
-                    force = force.plus();
+                    force = force.plus(body.gravitationalForce(nodes[i].getMass(), nodes[i].getCentre()));
                 }
                 force = force.plus(nodes[i].calcForceOnBody(body));;
             }
@@ -95,6 +90,16 @@ public class OctreeNode implements CosmicComponent {
         }
     }
 
+    @Override
+    public double getMass() {
+        return mass;
+    }
+
+    @Override
+    public Vector3 getCentre() {
+        return centreOfMass;
+    }
+
     /*public Body getBody(String name) {
         for (int i = 0; i < 8; i++) {
             if (Nodes[i] != null) {
@@ -106,4 +111,8 @@ public class OctreeNode implements CosmicComponent {
         }
         return null;
     }*/
+    @Override
+    public Body getBody() {
+        return null;
+    }
 }
