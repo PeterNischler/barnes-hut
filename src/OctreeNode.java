@@ -22,7 +22,6 @@ public class OctreeNode implements CosmicComponent {
     }
 
 
-
     @Override
     public Boolean add(Body body) {
         if (body.insideOfBoundary(diameter, centre) == false) {
@@ -47,7 +46,7 @@ public class OctreeNode implements CosmicComponent {
     }
 
     // calculates new Mass of the OctreeNode after adding body
-    public void calculateMass(Body body){
+    public void calculateMass(Body body) {
         /*double newMass = 0;
         for (int i = 0; i < 8; i++) {
             if (nodes[i] != null){
@@ -58,34 +57,39 @@ public class OctreeNode implements CosmicComponent {
     }
 
     // calculate new calculateCentreOfMass
-    public void calculateCentreOfMass(Body body){
-        centreOfMass = centreOfMass.times(mass).plus(body.getMassCenter().times(body.getMass())).times(1/(mass * body.getMass()));
+    public void calculateCentreOfMass(Body body) {
+        if (centreOfMass != null) {
+            centreOfMass = centreOfMass.times(mass).plus(body.getMassCenter().times(body.getMass())).times(1 / (mass * body.getMass()));
+        } else {
+            centreOfMass = body.getMassCenter();
+        }
     }
 
-    public Vector3 calcForceOnBody(Body body){
+    public Vector3 calcForceOnBody(Body body) {
         if ((diameter / centre.distance(body.getMassCenter())) < Simulation.T) {
             return centre.times(mass);
         }
         Vector3 force = new Vector3();
         //iterates over all 8 nodes. if d/r<T there is no recursive call and the
-        for (int i = 0; i < 8; i++){
-            if (nodes[i] != null){
+        for (int i = 0; i < 8; i++) {
+            if (nodes[i] != null) {
 
-                if ((diameter / centreNodes[i].distance(body.getMassCenter())) < Simulation.T){
+                if ((diameter / centreNodes[i].distance(body.getMassCenter())) < Simulation.T) {
                     force = force.plus(body.gravitationalForce(nodes[i].getMass(), nodes[i].getCentre()));
                 }
-                force = force.plus(nodes[i].calcForceOnBody(body));;
+                force = force.plus(nodes[i].calcForceOnBody(body));
+                ;
             }
         }
         return force;
     }
 
-    public void drawTree2D(){
-        for (int i = 0; i < 8; i++){
-            if (nodes[i] instanceof LeafNode){
+    public void drawTree2D() {
+        for (int i = 0; i < 8; i++) {
+            if (nodes[i] instanceof LeafNode) {
                 StdDraw.setPenColor(StdDraw.WHITE);
                 System.out.println(centreNodes[i].getX());
-                StdDraw.square(centreNodes[i].getX(), centreNodes[i].getY(), diameter/4);
+                StdDraw.square(centreNodes[i].getX(), centreNodes[i].getY(), diameter / 4);
             }
             nodes[i].drawTree2D();
         }
