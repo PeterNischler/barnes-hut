@@ -45,7 +45,7 @@ public class OctreeNode implements CosmicComponent {
         }
         return false;
     }
-
+ 
 
     public Vector3 calcForceOnBody(Body body){
         if ((diameter / centre.distance(body.getMassCenter())) < Simulation.T) {

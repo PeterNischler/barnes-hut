@@ -32,7 +32,7 @@ public class Octree {
         for (int i = 0; i < 8; i++) {
             if (body.insideOfBoundary(diameter/ 2, centreNodes[i])) {
                 if (Nodes[i] == null) {
-                    Nodes[i] = new LeafNode(body);
+                    Nodes[i] = new LeafNode();
                 } else if (Nodes[i] instanceof LeafNode) {
                     Body otherBody = Nodes[i].getBody();
                     Nodes[i] = new OctreeNode( diameter / 2, centreNodes[i]);

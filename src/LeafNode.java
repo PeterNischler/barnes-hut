@@ -1,8 +1,7 @@
 public class LeafNode implements  CosmicComponent{
     private Body body;
 
-    public LeafNode(Body body){
-        this.body = body;
+    public LeafNode(){
     }
 
     public Body getBody(){
@@ -22,6 +21,7 @@ public class LeafNode implements  CosmicComponent{
     }
 
     public Boolean add(Body body){
-        return false;
+        this.body = body;
+        return true;
     }
 }

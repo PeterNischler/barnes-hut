@@ -13,7 +13,7 @@ public class Simulation {
     public static final double T = 1.0;
 
     public static void main(String[] args) {
-        Body sun = new Body("Sol", 1.989e30, 696340e3, new Vector3(), new Vector3(), StdDraw.YELLOW);
+        Body sun = new Body("Sol", 1.989e30, 696340e3, new Vector3(0,0,0), new Vector3(0,0,0), StdDraw.YELLOW);
         Body earth = new Body("Earth", 5.972e24, 6371e3, new Vector3(148e9, 0, 0), new Vector3(0, 29.29e3, 0), StdDraw.BLUE);
         Body mercury = new Body("Mercury", 3.301e23, 2.4397e3, new Vector3(-46.0e9, 0, 0), new Vector3(0, -47.87e3, 0), StdDraw.ORANGE);
         Body venus = new Body("Venus",4.86747e24,6052e3,new Vector3(-1.707667e10,1.066132e11,2.450232e9),new Vector3(-34446.02,-5567.47,2181.10),StdDraw.PINK);
@@ -22,6 +22,9 @@ public class Simulation {
         Body[] bodies = new Body[]{sun, earth, mercury, venus, mars};
 
 
+        if (mercury.insideOfBoundary(Diameter, new Vector3(0,0,0)) == false){
+            System.exit(0);
+        }
 
         StdDraw.setCanvasSize(500, 500);
         StdDraw.setXscale(-2*AU,2*AU);
