@@ -51,26 +51,26 @@ public class OctreeNode implements CosmicComponent {
         if ((diameter / centre.distance(body.getMassCenter())) < Simulation.T) {
             return centre.times(mass);
         }
-        Vector3 v = new Vector3();
+        Vector3 force = new Vector3();
         for (int i = 0; i < 8; i++){
             if (nodes[i] != null){
                 if ((diameter / centreNodes[i].distance(body.getMassCenter())) < Simulation.T){
-                    //gruppe zsm fassen
+                    force = force.plus();
                 }
-                v = v.plus(nodes[i].calcForceOnBody(body));;
+                force = force.plus(nodes[i].calcForceOnBody(body));;
             }
         }
-        return v;
+        return force;
     }
 
     public void drawTree2D(){
         for (int i = 0; i < 8; i++){
-
-            if (nodes[i] != null){
+            if (nodes[i] instanceof LeafNode){
                 StdDraw.setPenColor(StdDraw.WHITE);
                 System.out.println(centreNodes[i].getX());
                 StdDraw.square(centreNodes[i].getX(), centreNodes[i].getY(), diameter/4);
             }
+            nodes[i].drawTree2D();
         }
     }
 

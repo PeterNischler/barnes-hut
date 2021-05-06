@@ -24,4 +24,7 @@ public class LeafNode implements  CosmicComponent{
         this.body = body;
         return true;
     }
+    public void drawTree2D(){
+
+    }
 }

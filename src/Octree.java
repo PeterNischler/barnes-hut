@@ -26,8 +26,7 @@ public class Octree {
     // planets must be inside the given bounds of a cube, the length of which is Cubeside, if it is outside of bounds return false
     // this cube is divided into 8 smaller cubes, and the body is added to node representative of its position in the cube
     public Boolean add(Body body) {
-        System.out.println( body.getName());
-        if (body.insideOfBoundary(Simulation.Diameter, centre) == false) {
+        if (body.insideOfBoundary(diameter, centre) == false) {
             return false;
         }
         for (int i = 0; i < 8; i++) {

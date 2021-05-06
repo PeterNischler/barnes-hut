@@ -9,7 +9,7 @@ public class Simulation {
 
     //dimension in all 3 axis of the CosmicCube
     //One cosmicCube has length of diameter * 2
-    public static final double Diameter = 2*AU;
+    public static final double Diameter = 4*AU;
 
     //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
     public static final double T = 1.0;
@@ -29,34 +29,46 @@ public class Simulation {
         }
 
         StdDraw.setCanvasSize(500, 500);
-        StdDraw.setXscale(-2*AU,2*AU);
-        StdDraw.setYscale(-2*AU,2*AU);
+        StdDraw.setXscale(-Diameter,Diameter);
+        StdDraw.setYscale(-Diameter,Diameter);
         StdDraw.enableDoubleBuffering();
         StdDraw.clear(StdDraw.BLACK);
 
         double seconds = 0;
 
         // simulation loop
-        while(seconds < 1) {
+        while(true) {
+            System.out.println("new iteration");
             //create new octree and add bodies
             Octree system = new Octree("system");
             for (int i = 0; i < bodies.length; i++){
-                System.out.println(system.add(bodies[i]));
-                bodies[i].getMassCenter().drawAsDot(AU/10, Color.RED);
+                system.add(bodies[i]);
+                //bodies[i].getMassCenter().drawAsDot(AU/10, Color.RED);
             }
 
             // calc force on bodies
             Vector3[] forceOnBody = new Vector3[bodies.length];
             for (int i = 0; i < bodies.length; i++){
-
                 forceOnBody[i] = system.calcForceOnBody(bodies[i]);
                 System.out.println(forceOnBody[i]);
             }
-            StdDraw.setPenColor(Color.WHITE);
-            StdDraw.square(0, 0 , Diameter/10*9);
-            system.drawTree2D();
 
+            for (int i = 0; i < system.size(); i++) {
+                bodies[i].move(forceOnBody[i]);
+            }
+            // show all movements in StdDraw canvas only every 3 hours (to speed up the simulation)
+            if (seconds%(3*3600) == 0) {
+                // clear old positions (exclude the following line if you want to draw orbits).
+                StdDraw.clear(StdDraw.BLACK);
 
+                // draw new positions
+                for (int i = 0; i < system.size(); i++) {
+                    bodies[i].draw();
+                }
+
+            }
+
+            //system.drawTree2D();
 
             // show new positions
             StdDraw.show();
