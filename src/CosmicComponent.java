@@ -8,4 +8,6 @@ public interface CosmicComponent {
 
    public void drawTree2D();
 
+   public double getMass();
+
 }

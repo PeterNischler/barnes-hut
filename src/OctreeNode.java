@@ -41,20 +41,30 @@ public class OctreeNode implements CosmicComponent {
                     nodes[i].add(otherBody);
                 }
                 boolean returnValue = nodes[i].add(body);
-                calculateCentreOfMass();
                 calculateMass();
+                calculateCentreOfMass();
                 return returnValue;
             }
         }
         return false;
     }
- 
 
-    public void calculateCentreOfMass(){
-
-    }
 
     public void calculateMass(){
+        double newMass = 0;
+        for (int i = 0; i < 8; i++) {
+            if (nodes[i] != null){
+                newMass += nodes[i].getMass();
+            }
+        }
+        mass = newMass;
+    }
+
+    public double getMass(){
+        return mass;
+    }
+
+    public void calculateCentreOfMass(){
 
     }
 
