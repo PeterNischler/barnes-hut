@@ -37,6 +37,9 @@ public class Body{
     //To calculate the force exerted on b1, simply multiply the normalized vector pointing from b1 to b2 with the
     //calculated force
     public Vector3 gravitationalForce(Body body) {
+        if (body.getName().equals(name)){
+            return new Vector3(0,0,0);
+        }
         Vector3 direction = body.position.minus(this.position);
         double distance = direction.length();
         direction.normalize();

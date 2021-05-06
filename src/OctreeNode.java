@@ -22,6 +22,11 @@ public class OctreeNode implements CosmicComponent {
     }
 
     @Override
+    public Body getBody() {
+        return null;
+    }
+
+    @Override
     public Boolean add(Body body) {
         if (body.insideOfBoundary(diameter, centre) == false) {
             return false;
@@ -41,7 +46,24 @@ public class OctreeNode implements CosmicComponent {
         return false;
     }
 
-    public Body getBody(String name) {
+
+    public Vector3 calcForceOnBody(Body body){
+        if ((diameter / centre.distance(body.getMassCenter())) < Simulation.T) {
+            return centre.times(mass);
+        }
+        Vector3 v = new Vector3();
+        for (int i = 0; i < 8; i++){
+            if (Nodes[i] != null){
+                if ((diameter / centreNodes[i].distance(body.getMassCenter())) < Simulation.T){
+                    //gruppe zsm fassen
+                }
+                v = v.plus(Nodes[i].calcForceOnBody(body));;
+            }
+        }
+        return v;
+    }
+
+    /*public Body getBody(String name) {
         for (int i = 0; i < 8; i++) {
             if (Nodes[i] != null) {
                 Body b = Nodes[i].getBody(name);
@@ -51,5 +73,5 @@ public class OctreeNode implements CosmicComponent {
             }
         }
         return null;
-    }
+    }*/
 }

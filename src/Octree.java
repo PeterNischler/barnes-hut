@@ -44,7 +44,17 @@ public class Octree {
         return false;
     }
 
-    public Body getBody(String name) {
+    public Vector3 calcForceOnBody(Body body){
+        Vector3 v = new Vector3();
+        for (int i = 0; i < 8; i++){
+            if (Nodes[i] != null){
+                v = v.plus(Nodes[i].calcForceOnBody(body));;
+            }
+        }
+        return v;
+    }
+
+    /*public Body getBody(String name) {
         for (int i = 0; i < 8; i++){
             if (Nodes[i] != null){
                 Body b =  Nodes[i].getBody(name);
@@ -54,7 +64,7 @@ public class Octree {
             }
         }
         return null;
-    }
+    }*/
 
     public Boolean remove(Body body) {
         return false;

@@ -15,6 +15,12 @@ public class LeafNode implements  CosmicComponent{
         }
         else return null;
     }
+
+    //calculates the gravitational force exerted by this body on body
+    public Vector3 calcForceOnBody(Body body){
+        return body.gravitationalForce(this.body);
+    }
+
     public Boolean add(Body body){
         return false;
     }

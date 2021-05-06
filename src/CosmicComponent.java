@@ -4,5 +4,7 @@ public interface CosmicComponent {
 
    public Boolean add(Body body);
 
+   Vector3 calcForceOnBody(Body body);
+
 
 }

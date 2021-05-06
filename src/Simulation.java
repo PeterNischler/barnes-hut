@@ -19,13 +19,10 @@ public class Simulation {
         Body venus = new Body("Venus",4.86747e24,6052e3,new Vector3(-1.707667e10,1.066132e11,2.450232e9),new Vector3(-34446.02,-5567.47,2181.10),StdDraw.PINK);
         Body mars = new Body("Mars",6.41712e23,3390e3,new Vector3(-1.010178e11,-2.043939e11,-1.591727E9),new Vector3(20651.98,-10186.67,-2302.79),StdDraw.RED);
 
+        Body[] bodies = new Body[]{sun, earth, mercury, venus, mars};
 
-        Octree system = new Octree("a");
-        system.add(sun);
-        system.add(earth);
-        system.add(mercury);
-        system.add(venus);
-        system.add(mars);
+
+
         StdDraw.setCanvasSize(500, 500);
         StdDraw.setXscale(-2*AU,2*AU);
         StdDraw.setYscale(-2*AU,2*AU);
@@ -35,26 +32,30 @@ public class Simulation {
         double seconds = 0;
 
         // simulation loop
-        /*while(true) {
-            //create new octree
-            Octree system = new Octree("a");
-            system.add(sun);
-            system.add(earth);
-            system.add(mercury);
-            system.add(venus);
-            system.add(mars);
+        while(true) {
+            //create new octree and add bodies
+            Octree system = new Octree("system");
+            for (int i = 0; i < bodies.length; i++){
+
+                System.out.println(system.add(bodies[i]));
+            }
+
+            // calc force on bodies
+            Vector3[] forceOnBody = new Vector3[bodies.length];
+            for (int i = 0; i < bodies.length; i++){
+
+                forceOnBody[i] = system.calcForceOnBody(bodies[i]);
+                System.out.println(forceOnBody[i]);
+            }
 
 
-            Vector3[] forceOnBody = new Vector3[system.size()];
-
+/*
             seconds++; // each iteration computes the movement of the celestial bodies within one second.
 
             // for each body (with index i): compute the total force exerted on it.
             for (int i = 0; i < system.size(); i++) {
                 forceOnBody[i] = new Vector3(); // begin with zero
 
-                //iter over tree
-                system.
                 for (int j = 0; j < system.size(); j++) {
                     if (i == j) continue;
 
@@ -81,13 +82,10 @@ public class Simulation {
 
                 // show new positions
                 StdDraw.show();
-            }
+            }*/
 
         }
     }
-    private Vector3[] calcForceOnBody(Octree system){
-        if (system.)
-        return new Vector3[];*/
-    }
+
 
 }

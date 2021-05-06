@@ -71,6 +71,11 @@ public class Vector3 {
         this.z = z / vectorLenght;
     }
 
+    //calculates distance between vector 1 and 2
+    public double distance(Vector3 v){
+        return Math.sqrt((this.x - v.x)*(this.x - v.x) + (this.y - v.y)*(this.y - v.y) + (this.y - v.y)*(this.y - v.y));
+    }
+
     // Draws a filled circle with a specified radius centered at the (x,y) coordinates of this vector
     // in the existing StdDraw canvas. The z-coordinate is not used.
     public void drawAsDot(double radius, Color color) {
