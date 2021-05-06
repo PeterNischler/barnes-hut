@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class Simulation {
     // gravitational constant
     public static final double G = 6.6743e-11;
@@ -7,7 +9,7 @@ public class Simulation {
 
     //dimension in all 3 axis of the CosmicCube
     //One cosmicCube has length of diameter * 2
-    public static final double Diameter = 8e12;
+    public static final double Diameter = 2*AU;
 
     //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
     public static final double T = 1.0;
@@ -40,6 +42,7 @@ public class Simulation {
             Octree system = new Octree("system");
             for (int i = 0; i < bodies.length; i++){
                 System.out.println(system.add(bodies[i]));
+                bodies[i].getMassCenter().drawAsDot(AU/10, Color.RED);
             }
 
             // calc force on bodies
@@ -49,8 +52,14 @@ public class Simulation {
                 forceOnBody[i] = system.calcForceOnBody(bodies[i]);
                 System.out.println(forceOnBody[i]);
             }
+            StdDraw.setPenColor(Color.WHITE);
+            StdDraw.square(0, 0 , Diameter/10*9);
+            system.drawTree2D();
 
 
+
+            // show new positions
+            StdDraw.show();
 
             seconds++; // each iteration computes the movement of the celestial bodies within one second.
 
@@ -82,8 +91,6 @@ public class Simulation {
                     system.get(i).draw();
                 }
 
-                // show new positions
-                StdDraw.show();
             }*/
 
         }

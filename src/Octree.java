@@ -26,6 +26,7 @@ public class Octree {
     // planets must be inside the given bounds of a cube, the length of which is Cubeside, if it is outside of bounds return false
     // this cube is divided into 8 smaller cubes, and the body is added to node representative of its position in the cube
     public Boolean add(Body body) {
+        System.out.println( body.getName());
         if (body.insideOfBoundary(Simulation.Diameter, centre) == false) {
             return false;
         }
@@ -65,6 +66,16 @@ public class Octree {
         }
         return null;
     }*/
+
+    public void drawTree2D(){
+        for (int i = 0; i < 8; i++){
+            if (nodes[i] != null){
+                StdDraw.setPenColor(StdDraw.WHITE);
+                System.out.println(centreNodes[i].getX());
+                StdDraw.square(centreNodes[i].getX(), centreNodes[i].getY(), diameter/4);
+            }
+        }
+    }
 
     public Boolean remove(Body body) {
         return false;
