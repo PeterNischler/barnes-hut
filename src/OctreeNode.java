@@ -46,6 +46,7 @@ public class OctreeNode implements CosmicComponent {
     }
 
     // calculates new Mass of the OctreeNode after adding body
+    // change name to updateMass
     public void calculateMass(Body body) {
         /*double newMass = 0;
         for (int i = 0; i < 8; i++) {
@@ -56,7 +57,8 @@ public class OctreeNode implements CosmicComponent {
         mass = mass + body.getMass();
     }
 
-    // calculate new calculateCentreOfMass
+    // calculate new CentreOfMass after a body is added.
+    // change name to updateCentreOfMass
     public void calculateCentreOfMass(Body body) {
         if (centreOfMass != null) {
             centreOfMass = centreOfMass.times(mass).plus(body.getMassCenter().times(body.getMass())).times(1 / (mass * body.getMass()));
@@ -73,14 +75,12 @@ public class OctreeNode implements CosmicComponent {
         //iterates over all 8 nodes. if d/r<T there is no recursive call and the
         for (int i = 0; i < 8; i++) {
             if (nodes[i] != null) {
-
                 if ((diameter / centreNodes[i].distance(body.getMassCenter())) < Simulation.T) {
                     Vector3 v = body.gravitationalForce(nodes[i].getMass(), nodes[i].getCentre());
                     System.out.println(v);
                     force = force.plus(v);
                 }
                 force = force.plus(nodes[i].calcForceOnBody(body));
-                ;
             }
         }
         return force;
