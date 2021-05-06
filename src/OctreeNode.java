@@ -65,6 +65,7 @@ public class OctreeNode implements CosmicComponent {
 
     public void drawTree2D(){
         for (int i = 0; i < 8; i++){
+
             if (nodes[i] != null){
                 StdDraw.setPenColor(StdDraw.WHITE);
                 System.out.println(centreNodes[i].getX());
