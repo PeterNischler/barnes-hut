@@ -22,9 +22,8 @@ public class Octree {
         this.diameter = Simulation.Diameter;
     }
 
-    // adds planet to the Octree, unless the planet is already present
-    // planets must be inside the given bounds of a cube, the length of which is Cubeside, if it is outside of bounds return false
-    // this cube is divided into 8 smaller cubes, and the body is added to node representative of its position in the cube
+    // adds body to the octree. the body must be inside of a cube with lenght Diameter, if it is not false is returned.
+    // the body will be added to one of the 8 octreenodes, representing the 8 cubes into which the larger cube is divided.
     public Boolean add(Body body) {
         if (body.insideOfBoundary(diameter, centre) == false) {
             return false;

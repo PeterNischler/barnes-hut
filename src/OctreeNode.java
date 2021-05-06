@@ -4,10 +4,10 @@ public class OctreeNode implements CosmicComponent {
     //ungerade bei x minus, gerade x immer plus
     //1-4 bei y immer plus, 5-8 bei y immer minus
     //1,2,5,6 bei z plus, 3,4,7,8 bei z minus
-    private double mass;
     private Vector3[] centreNodes;
     private CosmicComponent[] nodes = new CosmicComponent[8];
     private Vector3 centreOfMass;
+    private double mass;
 
     public OctreeNode(double diameter, Vector3 centre) {
         this.diameter = diameter;
@@ -40,12 +40,23 @@ public class OctreeNode implements CosmicComponent {
                     nodes[i] = new OctreeNode(diameter / 2, centreNodes[i]);
                     nodes[i].add(otherBody);
                 }
-                return nodes[i].add(body);
+                boolean returnValue = nodes[i].add(body);
+                calculateCentreOfMass();
+                calculateMass();
+                return returnValue;
             }
         }
         return false;
     }
  
+
+    public void calculateCentreOfMass(){
+
+    }
+
+    public void calculateMass(){
+
+    }
 
     public Vector3 calcForceOnBody(Body body){
         if ((diameter / centre.distance(body.getMassCenter())) < Simulation.T) {

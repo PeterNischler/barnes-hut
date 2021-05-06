@@ -29,46 +29,34 @@ public class Simulation {
         }
 
         StdDraw.setCanvasSize(500, 500);
-        StdDraw.setXscale(-Diameter,Diameter);
-        StdDraw.setYscale(-Diameter,Diameter);
+        StdDraw.setXscale(-2*AU,2*AU);
+        StdDraw.setYscale(-2*AU,2*AU);
         StdDraw.enableDoubleBuffering();
         StdDraw.clear(StdDraw.BLACK);
 
         double seconds = 0;
 
         // simulation loop
-        while(true) {
-            System.out.println("new iteration");
+        while(seconds < 1) {
             //create new octree and add bodies
             Octree system = new Octree("system");
             for (int i = 0; i < bodies.length; i++){
-                system.add(bodies[i]);
-                //bodies[i].getMassCenter().drawAsDot(AU/10, Color.RED);
+                System.out.println(system.add(bodies[i]));
+                bodies[i].getMassCenter().drawAsDot(AU/10, Color.RED);
             }
 
             // calc force on bodies
             Vector3[] forceOnBody = new Vector3[bodies.length];
             for (int i = 0; i < bodies.length; i++){
+
                 forceOnBody[i] = system.calcForceOnBody(bodies[i]);
                 System.out.println(forceOnBody[i]);
             }
+            StdDraw.setPenColor(Color.WHITE);
+            StdDraw.square(0, 0 , Diameter/10*9);
+            system.drawTree2D();
 
-            for (int i = 0; i < system.size(); i++) {
-                bodies[i].move(forceOnBody[i]);
-            }
-            // show all movements in StdDraw canvas only every 3 hours (to speed up the simulation)
-            if (seconds%(3*3600) == 0) {
-                // clear old positions (exclude the following line if you want to draw orbits).
-                StdDraw.clear(StdDraw.BLACK);
 
-                // draw new positions
-                for (int i = 0; i < system.size(); i++) {
-                    bodies[i].draw();
-                }
-
-            }
-
-            //system.drawTree2D();
 
             // show new positions
             StdDraw.show();
