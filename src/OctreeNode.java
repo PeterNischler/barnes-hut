@@ -40,6 +40,7 @@ public class OctreeNode implements CosmicComponent {
             }
         }
         return false;
+        // slightly mor efficient implementation
         /*Vector3 position = body.getMassCenter().minus(centre);
         int cubeNumber;
         if (position.getX() >= 0) {

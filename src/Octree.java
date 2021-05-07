@@ -41,6 +41,7 @@ public class Octree {
             }
         }
         return false;
+        //slightly more efficient implementation
         /*Vector3 position = body.getMassCenter();
         int cubeNumber;
         if (position.getX() >= 0) {
