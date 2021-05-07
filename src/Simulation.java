@@ -39,38 +39,44 @@ public class Simulation {
 
         // simulation loop
         while(true) {
+            double start = System.nanoTime();
+
+            System.out.println("durchlauf: " + seconds);
+
             if (seconds > 5){
-                break;
+                //break;
             }
             seconds++; // each iteration computes the movement of the celestial bodies within one second.
-
             //create new octree and add bodies
+            double starta = System.nanoTime();
             Octree system = new Octree("system");
             for (int i = 0; i < bodies.length; i++){
                 system.add(bodies[i]);
-                bodies[i].getMassCenter().drawAsDot(AU/10, Color.RED);
             }
+            System.out.println((System.nanoTime() - starta) + " add");
 
             // calc force on bodies and put results in array
+            double startf = System.nanoTime();
             Vector3[] forceOnBody = new Vector3[bodies.length];
             for (int i = 0; i < bodies.length; i++){
                 forceOnBody[i] = system.calcForceOnBody(bodies[i]);
-                //System.out.println(forceOnBody[i]);
-                //System.out.println();
             }
+            System.out.println((System.nanoTime() - startf) + " force");
 
             //system.drawTree2D();
 
             // for each body (with index i): move it according to the total force exerted on it.
+            double startm = System.nanoTime();
             for (int i = 0; i < bodies.length; i++){
 
                 bodies[i].move(forceOnBody[i]);
             }
+            System.out.println((System.nanoTime() - startm) + " move");
+            double startd = System.nanoTime();
 
             // show all movements in StdDraw canvas only every 3 hours (to speed up the simulation)
-            System.out.println(seconds%(3*3600));
-            //if (seconds%(3*3600) == 0) {
-            if (true) {
+            if (seconds%(3*3600) == 0) {
+            //if (true) {
                 // clear old positions (exclude the following line if you want to draw orbits).
                 StdDraw.clear(StdDraw.BLACK);
 
@@ -78,10 +84,17 @@ public class Simulation {
                 for (int i = 0; i < bodies.length; i++) {
                     bodies[i].draw();
                 }
+                double starts = System.nanoTime();
 
+                StdDraw.show();
+                System.out.println((System.nanoTime() - starts) + " show");
             }
+            System.out.println((System.nanoTime() - startd) + " draw");
+
+
             // show new positions
-            StdDraw.show();
+
+
 
 
  /*           // for each body (with index i): compute the total force exerted on it.
@@ -95,7 +108,7 @@ public class Simulation {
                     forceOnBody[i] = forceOnBody[i].plus(forceToAdd);
                 }
             }
-*/
+*/          System.out.println((System.nanoTime()-start) +  " all");
         }
     }
 

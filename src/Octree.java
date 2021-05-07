@@ -53,18 +53,6 @@ public class Octree {
         return v;
     }
 
-    /*public Body getBody(String name) {
-        for (int i = 0; i < 8; i++){
-            if (Nodes[i] != null){
-                Body b =  Nodes[i].getBody(name);
-                if (b != null){
-                    return b;
-                }
-            }
-        }
-        return null;
-    }*/
-
     public void drawTree2D(){
         for (int i = 0; i < 8; i++){
             if (nodes[i] != null){
