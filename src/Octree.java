@@ -28,7 +28,7 @@ public class Octree {
         if (body.insideOfBoundary(diameter, centre) == false) {
             return false;
         }
-        /*for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++) {
             if (body.insideOfBoundary(diameter/ 2, centreNodes[i])) {
                 if (nodes[i] == null) {
                     nodes[i] = new LeafNode();
@@ -40,8 +40,8 @@ public class Octree {
                 return nodes[i].add(body);
             }
         }
-        return false; */
-        Vector3 position = body.getMassCenter();
+        return false;
+        /*Vector3 position = body.getMassCenter();
         int cubeNumber;
         if (position.getX() >= 0) {
             if (position.getY() >= 0) {
@@ -79,7 +79,7 @@ public class Octree {
             nodes[cubeNumber] = new OctreeNode( diameter / 2, centreNodes[cubeNumber]);
             nodes[cubeNumber].add(otherBody);
         }
-        return nodes[cubeNumber].add(body);
+        return nodes[cubeNumber].add(body);*/
     }
 
     public Vector3 calcForceOnBody(Body body) {

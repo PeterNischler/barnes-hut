@@ -24,10 +24,10 @@ public class OctreeNode implements CosmicComponent {
 
     @Override
     public Boolean add(Body body) {
-        /*if (body.insideOfBoundary(diameter, centre) == false) {
+        if (body.insideOfBoundary(diameter, centre) == false) {
             return false;
-        }*/
-        /*for (int i = 0; i < 8; i++) {
+        }
+        for (int i = 0; i < 8; i++) {
             if (body.insideOfBoundary(diameter / 2, centreNodes[i])) {
                 if (nodes[i] == null) {
                     nodes[i] = new LeafNode();
@@ -42,8 +42,8 @@ public class OctreeNode implements CosmicComponent {
                 return returnValue;
             }
         }
-        return false;*/
-        Vector3 position = body.getMassCenter().minus(centre);
+        return false;
+        /*Vector3 position = body.getMassCenter().minus(centre);
         int cubeNumber;
         if (position.getX() >= 0) {
             if (position.getY() >= 0) {
@@ -84,7 +84,7 @@ public class OctreeNode implements CosmicComponent {
         boolean returnValue = nodes[cubeNumber].add(body);
         calculateCentreOfMass(body);
         calculateMass(body);
-        return returnValue;
+        return returnValue;*/
 
     }
 
