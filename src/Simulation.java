@@ -78,10 +78,10 @@ public class Simulation {
                 for (int i = 0; i < bodies.length; i++) {
                     bodies[i].draw();
                 }
-
+                StdDraw.show();
             }
             // show new positions
-            StdDraw.show();
+
 
 
  /*           // for each body (with index i): compute the total force exerted on it.
