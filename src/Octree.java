@@ -85,14 +85,14 @@ public class Octree {
     }
 
     public Vector3 calcForceOnBody(Body body) {
-        Vector3 v = new Vector3();
+        Vector3 force = new Vector3();
         for (int i = 0; i < 8; i++) {
             if (nodes[i] != null) {
-                v = v.plus(nodes[i].calcForceOnBody(body));
-                ;
+                force = force.plus(nodes[i].calcForceOnBody(body));
             }
         }
-        return v;
+        body.setForce(force);
+        return force;
     }
 
     public void drawTree2D() {

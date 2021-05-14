@@ -120,9 +120,9 @@ public class OctreeNode implements CosmicComponent {
                     Vector3 v = body.gravitationalForce(nodes[i].getMass(), nodes[i].getCentre());
                     //System.out.println( "." + v);
                     force = force.plus(v);
+                } else {
+                    force = force.plus(nodes[i].calcForceOnBody(body));
                 }
-                force = force.plus(nodes[i].calcForceOnBody(body));
-                ;
             }
         }
         return force;
