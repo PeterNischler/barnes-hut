@@ -184,7 +184,6 @@ public class CosmicSystem {
     // Returns a new list that contains the same elements as this list in reverse order. The list 'this'
     // is not changed and only the references to the bodies are copied, not their content (shallow copy).
     public CosmicSystem reverse() {
-        //TODO: implement method.
         CosmicSystem res = new CosmicSystem("reverse-" + name);
         CSnode current = getCSnode(size()-1);
         while (current != null){
@@ -203,20 +202,18 @@ public class CosmicSystem {
     //
     //Hint: also use toString() in Body.java for this.
     public String toString() {
-        //TODO: implement method.
-        String res = name + "\n";
+        String res = name + ": {";
         CSnode current = head;
 
         while (current != null){
-            res = res + current.body + "\n";
+            res = res + current.body + ", ";
             current = current.next;
         }
 
-        return res;
+        return res + "}";
     }
     //AB3 end
 
-    //TODO: Define additional class(es) implementing the linked list (either here or outside class).
     public CSnode getHead(){
         return head;
     }

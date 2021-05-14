@@ -49,7 +49,7 @@ public class Simulation {
         }
         System.out.println(SolarSystem);
 
-        if (earth.insideOfBoundary(Diameter, new Vector3(0,0,0)) == false){
+        if (!earth.insideOfBoundary(Diameter, new Vector3(0,0,0))){
             System.exit(0);
         }
 
@@ -64,44 +64,34 @@ public class Simulation {
 
         // simulation loop
         while(true) {
-            //double start = System.nanoTime();
-
-            //System.out.println("durchlauf: " + seconds);
-
             if (seconds > 5){
-                //break;
+                break; // uncomment this line to stop after 5 seconds
             }
             seconds++; // each iteration computes the movement of the celestial bodies within one second.
+
             //create new octree and add bodies
-            //double starta = System.nanoTime();
             Octree system = new Octree("system");
             for (int i = 0; i < SolarSystem.size(); i++){
                 //system.add(bodies[i]);
-                system.add(SolarSystem.get(i));
+                System.out.println(system.add(SolarSystem.get(i)));
             }
-            //System.out.println((System.nanoTime() - starta) + " add");
 
             // calc force on bodies and put results in array
-            //double startf = System.nanoTime();
-            //System.out.println(SolarSystem.size());
             Vector3[] forceOnBody = new Vector3[SolarSystem.size()];
             for (int i = 0; i < SolarSystem.size(); i++){
                 //forceOnBody[i] = system.calcForceOnBody(bodies[i]);
                 forceOnBody[i] = system.calcForceOnBody(SolarSystem.get(i));
 
             }
-            //System.out.println((System.nanoTime() - startf) + " force");
 
+            //visualize Octree
             //system.drawTree2D();
 
             // for each body (with index i): move it according to the total force exerted on it.
-            //double startm = System.nanoTime();
             for (int i = 0; i < SolarSystem.size(); i++){
                 //bodies[i].move(forceOnBody[i]);
                 SolarSystem.get(i).move(forceOnBody[i]);
-
             }
-            //System.out.println((System.nanoTime() - startm) + " move");
 
             // show all movements in StdDraw canvas only every 3 hours (to speed up the simulation)
             if (seconds%(3*3600) == 0) {
