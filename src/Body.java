@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.Vector;
 
 // This class represents celestial bodies like stars, planets, asteroids, etc..
-public class Body{
+public class Body {
 
     //TODO: change modifiers.
     private String name;
@@ -13,7 +13,7 @@ public class Body{
     private Color color; // for drawing the body.
     private Vector3 forceOnBody;
 
-    //TODO: define constructor.
+    //constructor for standard body
     public Body(String name, double mass, double radius, Vector3 position, Vector3 currentMovement, Color color) {
         this.name = name;
         this.mass = mass;
@@ -23,7 +23,14 @@ public class Body{
         this.color = color;
     }
 
-    public Body() {
+    //constructor for random body with unique number key
+    public Body(int uniqueNumber, double maxMass, double maxRadius, Vector3 maxPosition, Vector3 maxCurrentMovement) {
+        this.name = "body " + Integer.toString(uniqueNumber);
+        this.mass = maxMass * Math.random();
+        this.radius = maxRadius * Math.random();
+        this.position = maxPosition.times(Math.random());
+        this.currentMovement = maxCurrentMovement.times(Math.random());
+        this.color = Color.cyan;
     }
 
     // Returns the distance between this body and the specified 'body'.
@@ -37,8 +44,8 @@ public class Body{
     //To calculate the force exerted on b1, simply multiply the normalized vector pointing from b1 to b2 with the
     //calculated force
     public Vector3 gravitationalForce(Body body) {
-        if (body.getName().equals(name)){
-            return new Vector3(0,0,0);
+        if (body.getName().equals(name)) {
+            return new Vector3(0, 0, 0);
         }
         Vector3 direction = body.position.minus(this.position);
         double distance = direction.length();
@@ -48,8 +55,8 @@ public class Body{
     }
 
     public Vector3 gravitationalForce(double mass, Vector3 position) {
-        if (this.position == position){
-            return new Vector3(0,0,0);
+        if (this.position == position) {
+            return new Vector3(0, 0, 0);
         }
         Vector3 direction = position.minus(this.position);
         double distance = direction.length();
@@ -120,10 +127,10 @@ public class Body{
     }
 
     // checks if Body is inside of an cubical boundary
-    public boolean insideOfBoundary (double diameter, Vector3 centre){
+    public boolean insideOfBoundary(double diameter, Vector3 centre) {
         Vector3 boundaryVector = position.minus(centre);
-        if (Math.abs(boundaryVector.getX()) > diameter/2 || Math.abs(boundaryVector.getY()) > diameter/2
-                || Math.abs(boundaryVector.getY()) > diameter/2){
+        if (Math.abs(boundaryVector.getX()) > diameter / 2 || Math.abs(boundaryVector.getY()) > diameter / 2
+                || Math.abs(boundaryVector.getY()) > diameter / 2) {
             return false;
         }
         return true;
