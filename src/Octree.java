@@ -25,7 +25,8 @@ public class Octree {
     // adds body to the octree. the body must be inside of a cube with lenght Diameter, if it is not false is returned.
     // the body will be added to one of the 8 octreenodes, representing the 8 cubes into which the larger cube is divided.
     public Boolean add(Body body) {
-        if (body.insideOfBoundary(diameter, centre) == false) {
+        //System.out.println(body.getName());
+        if (!body.insideOfBoundary(diameter, centre)) {
             return false;
         }
         for (int i = 0; i < 8; i++) {

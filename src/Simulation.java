@@ -33,16 +33,16 @@ public class Simulation {
 
         for (int i = 0; i < 10; i++){
             String name = "a" + i;
-            double mass = Math.random()*696340e3+371e1;
-            double radius = (Math.random()*696340e3)+371e1;
+            double mass = Math.random()*1.989e30 + 7.348e22; //max = mass of sun, min = mass of earths moon
+            double radius = (Math.random()*696340e3) + 1737.5e3; // max = radius of sun, min = radius of earths moon
             Vector3 position = new Vector3(
-                    ((Math.random()*Diameter)+Diameter/2),
-                    ((Math.random()*Diameter)+Diameter/2),
-                    ((Math.random()*Diameter)+Diameter/2));
+                    ((Math.random()*Diameter/2)-(Diameter/2)),
+                    ((Math.random()*Diameter/2)-(Diameter/2)),
+                    ((Math.random()*Diameter/2)-(Diameter/2)));
             Vector3 currentMovement = new Vector3(
-                    ((Math.random()*Diameter)+Diameter/2),
-                    ((Math.random()*Diameter)+Diameter/2),
-                    ((Math.random()*Diameter)+Diameter/2));
+                    ((Math.random()*30000/2)),
+                    ((Math.random()*30000/2)),
+                    ((Math.random()*30000/2)));
             //SolarSystem.add(new Body(name, mass, radius, position, currentMovement, StdDraw.YELLOW));
             SolarSystem.add(new Body(name, mass, radius, position, currentMovement, StdDraw.YELLOW));
 
@@ -64,8 +64,8 @@ public class Simulation {
 
         // simulation loop
         while(true) {
-            if (seconds > 5){
-                break; // uncomment this line to stop after 5 seconds
+            if (seconds >= 2){
+                //break; // uncomment this line to stop after 5 seconds
             }
             seconds++; // each iteration computes the movement of the celestial bodies within one second.
 
@@ -73,7 +73,9 @@ public class Simulation {
             Octree system = new Octree("system");
             for (int i = 0; i < SolarSystem.size(); i++){
                 //system.add(bodies[i]);
-                System.out.println(system.add(SolarSystem.get(i)));
+                system.add(SolarSystem.get(i));
+                //System.out.println(SolarSystem.get(i).getName());
+                //System.out.println(system.add(SolarSystem.get(i)));
             }
 
             // calc force on bodies and put results in array
@@ -95,8 +97,6 @@ public class Simulation {
 
             // show all movements in StdDraw canvas only every 3 hours (to speed up the simulation)
             if (seconds%(3*3600) == 0) {
-                //double startd = System.nanoTime();
-                //if (true) {
                 // clear old positions (exclude the following line if you want to draw orbits).
                 StdDraw.clear(StdDraw.BLACK);
 
@@ -106,16 +106,9 @@ public class Simulation {
                     SolarSystem.get(i).draw();
 
                 }
-                //System.out.println((System.nanoTime() - startd) + " draw");
-                //double starts = System.nanoTime();
-
+                // show new positions
                 StdDraw.show();
-                //System.out.println((System.nanoTime() - starts) + " show");
             }
-
-
-            // show new positions
-          //System.out.println((System.nanoTime()-start) +  " all");
         }
     }
 
