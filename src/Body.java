@@ -33,6 +33,7 @@ public class Body {
         this.color = Color.cyan;
     }
 
+
     // Returns the distance between this body and the specified 'body'.
     public double distanceTo(Body body) {
         return this.position.minus(body.position).length();
