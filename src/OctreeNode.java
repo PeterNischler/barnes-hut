@@ -24,6 +24,7 @@ public class OctreeNode implements CosmicComponent {
 
     @Override
     public Boolean add(Body body) {
+        //System.out.println(body.getName());
         for (int i = 0; i < 8; i++) {
             if (body.insideOfBoundary(diameter / 2, centreNodes[i])) {
                 if (nodes[i] == null) {

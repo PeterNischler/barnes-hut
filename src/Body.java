@@ -130,6 +130,8 @@ public class Body {
     // checks if Body is inside of an cubical boundary
     public boolean insideOfBoundary(double diameter, Vector3 centre) {
         Vector3 boundaryVector = position.minus(centre);
+        //System.out.println("\t" + (boundaryVector.getX()));
+        //.out.println("\t" + (Math.abs(boundaryVector.getX()) > diameter/ 2));
         if (Math.abs(boundaryVector.getX()) > diameter / 2 || Math.abs(boundaryVector.getY()) > diameter / 2
                 || Math.abs(boundaryVector.getY()) > diameter / 2) {
             return false;
