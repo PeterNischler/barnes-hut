@@ -1,9 +1,6 @@
 public class OctreeNode implements CosmicComponent {
     private Vector3 centre;
     private double diameter; //diameter of octant = edge length
-    //ungerade bei x minus, gerade x immer plus
-    //1-4 bei y immer plus, 5-8 bei y immer minus
-    //1,2,5,6 bei z plus, 3,4,7,8 bei z minus
     private Vector3[] centreNodes;
     private CosmicComponent[] nodes = new CosmicComponent[8];
     private Vector3 centreOfMass;
@@ -12,6 +9,9 @@ public class OctreeNode implements CosmicComponent {
     public OctreeNode(double diameter, Vector3 centre) {
         this.diameter = diameter;
         this.centre = centre;
+        //ungerade bei x minus, gerade x immer plus
+        //1-4 bei y immer plus, 5-8 bei y immer minus
+        //1,2,5,6 bei z plus, 3,4,7,8 bei z minus
         centreNodes = new Vector3[]{new Vector3(new Vector3(-diameter / 4, diameter / 4, diameter / 4)), centre.plus(new Vector3(diameter / 4, diameter / 4, diameter / 4)),
                 centre.plus(new Vector3(-diameter / 4, diameter / 4, -diameter / 4)),
                 centre.plus(new Vector3(diameter / 4, diameter / 4, -diameter / 4)),
@@ -114,10 +114,10 @@ public class OctreeNode implements CosmicComponent {
 
     //returns vector of force exerted on the input body by all other bodies in the simulation
     public Vector3 calcForceOnBody(Body body) {
-        Vector3 force = new Vector3();
-        Vector3 v;
-        //iterates over all 8 nodes. if d/r<T there is no recursive call and the force is not calculated but just taken
-        // from the node
+        Vector3 force = new Vector3(); //total force exerted on body, will be returned at the end
+        Vector3 v; //force of one LeafNode (=Body) or tree branch
+        //iterate over all 8 nodes.
+        // if d/r<T there is no recursive call and the force is not calculated but just taken from the node
         for (int i = 0; i < 8; i++) {
             if (nodes[i] != null) {
                 double d = diameter;

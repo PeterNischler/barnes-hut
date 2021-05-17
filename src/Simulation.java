@@ -21,20 +21,21 @@ public class Simulation {
         Body mercury = new Body("Mercury", 3.301e23, 2.4397e3, new Vector3(-46.0e9, 0, 0), new Vector3(0, -47.87e3, 0), StdDraw.ORANGE);
         Body venus = new Body("Venus",4.86747e24,6052e3,new Vector3(-1.707667e10,1.066132e11,2.450232e9),new Vector3(-34446.02,-5567.47,2181.10),StdDraw.PINK);
         Body mars = new Body("Mars",6.41712e23,3390e3,new Vector3(-1.010178e11,-2.043939e11,-1.591727E9),new Vector3(20651.98,-10186.67,-2302.79),StdDraw.RED);
-        //list with all bodies
-        CosmicSystem SolarSystem = new CosmicSystem("SolarSystem");
 
-        SolarSystem.add(sun);
-        SolarSystem.add(earth);
-        SolarSystem.add(venus);
-        SolarSystem.add(mercury);
-        SolarSystem.add(mars);
 
-        //generate random bodies and add them to the list SolarSystem
-        for (int i = 0; i < 100; i++){
+        int n = 20; //number of bodies in simulation
+        Body[] bodies = new Body[n]; //array containing all bodies in simulation
+
+        bodies[0] = sun;
+        bodies[1] = earth;
+        bodies[2] = venus;
+        bodies[3] = mercury;
+        bodies[4] = mars;
+
+        //generate random bodies and add them to the array bodies
+        for (int i = 5; i < n; i++){
             String name = "a" + i;
             double mass = Math.random()*10e24 + 7.348e2; //min = mass of earths moon
-            System.out.println(mass);
             double radius = (Math.random()*6371e3) + 1737.5; // max = earth , min = radius of earths moon
             Vector3 position = new Vector3(
                     ((Math.random()*Diameter)-(Diameter/2)),
@@ -44,7 +45,7 @@ public class Simulation {
                     ((Math.random()*30000/2)),
                     ((Math.random()*30000/2)),
                     ((Math.random()*30000/2)));
-            SolarSystem.add(new Body(name, mass, radius, position, currentMovement, StdDraw.LIGHT_GRAY));
+            bodies[i] = new Body(name, mass, radius, position, currentMovement, StdDraw.LIGHT_GRAY);
 
         }
 
@@ -66,21 +67,21 @@ public class Simulation {
 
             //create new octree and add bodies
             Octree system = new Octree("system");
-            for (int i = 0; i < SolarSystem.size(); i++){
-                system.add(SolarSystem.get(i));
+            for (int i = 0; i < n; i++){
+                system.add(bodies[i]);
             }
 
             // calc force on bodies and save result in body
-            for (int i = 0; i < SolarSystem.size(); i++){
-                SolarSystem.get(i).setForce(system.calcForceOnBody(SolarSystem.get(i)));
+            for (int i = 0; i < n; i++){
+                bodies[i].setForce(system.calcForceOnBody(bodies[i]));
             }
 
             //visualize Octree
             //system.drawTree2D();
 
             // for each body (with index i): move it according to the total force exerted on it.
-            for (int i = 0; i < SolarSystem.size(); i++){
-                SolarSystem.get(i).move();
+            for (int i = 0; i < n; i++){
+                bodies[i].move();
             }
 
             // show all movements in StdDraw canvas only every 3 hours (to speed up the simulation)
@@ -89,10 +90,8 @@ public class Simulation {
                 StdDraw.clear(StdDraw.BLACK);
 
                 // draw new positions
-                for (int i = 0; i < SolarSystem.size(); i++) {
-                    //bodies[i].draw();
-                    SolarSystem.get(i).draw();
-
+                for (int i = 0; i < n; i++) {
+                    bodies[i].draw();
                 }
                 // show new positions
                 StdDraw.show();

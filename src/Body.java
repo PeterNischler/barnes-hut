@@ -47,7 +47,11 @@ public class Body {
     public Vector3 gravitationalForce(Body body) {
         return gravitationalForce(body.mass, body.position);
     }
-
+    //Returns a vector representing the gravitational force exerted by the entity with 'mass' and 'position' on this body.
+    //The gravitational Force F is calculated by F = G*(m1*m2)/(r*r), with m1 and m2 being the masses of the objects
+    //interacting, r being the distance between the centers of the masses and G being the gravitational constant.
+    //To calculate the force exerted on b1, simply multiply the normalized vector pointing from b1 to b2 with the
+    //calculated force
     public Vector3 gravitationalForce(double mass, Vector3 position) {
         if (this.position == position) {
             return new Vector3(0, 0, 0);
