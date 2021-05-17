@@ -70,7 +70,7 @@ public class Simulation {
 
         // simulation loop
         while (true) {
-            if (seconds >= 2) {
+            if (seconds >= 1) {
                 //break; // uncomment this line to stop after 5 seconds
             }
             seconds++; // each iteration computes the movement of the celestial bodies within one second.
@@ -83,9 +83,10 @@ public class Simulation {
                 //System.out.println(SolarSystem.get(i).getName());
                 //System.out.println(system.add(SolarSystem.get(i)));
             }
+            //System.out.println(system);
 
             // calc force on bodies and put results in array
-            Vector3[] forceOnBody = new Vector3[SolarSystem.size()];
+            //Vector3[] forceOnBody = new Vector3[SolarSystem.size()];
             for (int i = 0; i < SolarSystem.size(); i++) {
                 //forceOnBody[i] = system.calcForceOnBody(bodies[i]);
                 //forceOnBody[i] = system.calcForceOnBody(SolarSystem.get(i));

@@ -30,12 +30,12 @@ public class Octree {
             return false;
         }
         for (int i = 0; i < 8; i++) {
-            if (body.insideOfBoundary(diameter/ 2, centreNodes[i])) {
+            if (body.insideOfBoundary(diameter / 2, centreNodes[i])) {
                 if (nodes[i] == null) {
                     nodes[i] = new LeafNode();
                 } else if (nodes[i] instanceof LeafNode) {
                     Body otherBody = nodes[i].getBody();
-                    nodes[i] = new OctreeNode( diameter / 2, centreNodes[i]);
+                    nodes[i] = new OctreeNode(diameter / 2, centreNodes[i]);
                     nodes[i].add(otherBody);
                 }
                 return nodes[i].add(body);
@@ -114,6 +114,20 @@ public class Octree {
 
     public int size() {
         return 0;
+    }
+
+    public String toString() {
+        String returnValue = "<Octree: ";
+        for (int i = 0; i < 8 ; i++) {
+            if(nodes[i] == null){
+                returnValue = returnValue + i + "empty\n";
+            }else {
+                returnValue = returnValue + nodes[i].toString() + "\n";
+            }
+
+        }
+
+        return returnValue + ">";
     }
 
 }

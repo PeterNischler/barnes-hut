@@ -11,4 +11,6 @@ public interface CosmicComponent {
    public double getMass();
    public Vector3 getCentre();
 
+   public String toString();
+
 }

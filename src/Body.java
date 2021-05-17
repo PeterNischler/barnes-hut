@@ -88,7 +88,8 @@ public class Body {
     // name, mass, radius, position and current movement. Example:
     // "Earth, 5.972E24 kg, radius: 6371000.0 m, position: [1.48E11,0.0,0.0] m, movement: [0.0,29290.0,0.0] m/s."
     public String toString() {
-        return this.name/*+ ", " + Double.toString(this.mass) + " kg, radius: " + Double.toString(this.radius) +
+        return "<" + this.name + ">"
+                /*+ ", " + Double.toString(this.mass) + " kg, radius: " + Double.toString(this.radius) +
                 " m, position: " + this.position.toString() + " m, movement: " + this.currentMovement.toString() +
                 " m/s."*/;
     }

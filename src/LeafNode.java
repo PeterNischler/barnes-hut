@@ -39,4 +39,6 @@ public class LeafNode implements  CosmicComponent{
     public Vector3 getCentre() {
         return body.getMassCenter();
     }
+
+    public String toString() { return body.toString();}
 }

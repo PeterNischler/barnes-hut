@@ -87,6 +87,7 @@ public class OctreeNode implements CosmicComponent {
 
     }
 
+    // TODO: Calculate mass überarbeiten
     // calculates new Mass of the OctreeNode after adding body
     public void calculateMass(Body body) {
         /*double newMass = 0;
@@ -101,7 +102,8 @@ public class OctreeNode implements CosmicComponent {
     // calculate new calculateCentreOfMass
     public void calculateCentreOfMass(Body body) {
         if (centreOfMass != null) {
-            centreOfMass = centreOfMass.times(mass).plus(body.getMassCenter().times(body.getMass())).times(1 / (mass * body.getMass()));
+            centreOfMass = (centreOfMass.times(mass).plus(body.getMassCenter().times(body.getMass()))).times(1 / (mass + body.getMass()));
+            // cOMassX = (centreOfMass.getX() * mass + body.getMassCenter().getX() * body.getMass())/(mass * body.getMass());
         } else {
             centreOfMass = body.getMassCenter();
         }
@@ -163,5 +165,17 @@ public class OctreeNode implements CosmicComponent {
     @Override
     public Body getBody() {
         return null;
+    }
+
+    public String toString() {
+        String returnValue = "<nodeMass: " + mass + ", nodeCentreOfMass: " + centreOfMass + ";: ";
+        for (int i = 0; i < 8; i++) {
+            if (nodes[i] == null) {
+                returnValue = returnValue + i + "empty";
+            } else {
+                returnValue = returnValue + nodes[i].toString();
+            }
+        }
+        return returnValue + ">";
     }
 }
