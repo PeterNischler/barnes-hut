@@ -84,18 +84,19 @@ public class Octree {
         return nodes[cubeNumber].add(body);*/
     }
 
+    //returns vector of force exerted by all other bodies on the input body
     public Vector3 calcForceOnBody(Body body) {
-        Vector3 force = new Vector3();
+        Vector3 v = new Vector3();
         for (int i = 0; i < 8; i++) {
             if (nodes[i] != null) {
-                force = force.plus(nodes[i].calcForceOnBody(body));
+                v = v.plus(nodes[i].calcForceOnBody(body));
             }
         }
-        body.setForce(force);
-        return force;
+        return v;
     }
 
     public void drawTree2D() {
+        //TODO
         for (int i = 0; i < 8; i++) {
             if (nodes[i] != null) {
                 StdDraw.setPenColor(StdDraw.WHITE);

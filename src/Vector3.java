@@ -62,7 +62,7 @@ public class Vector3 {
 
     // Returns the length (norm) of this vector.
     public double length() {
-        return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2));
+        return Math.sqrt(x*x + y*y + z*z);
     }
 
     // Normalizes this vector: changes the length of this vector such that it becomes 1.

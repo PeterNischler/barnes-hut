@@ -37,6 +37,7 @@ public class OctreeNode implements CosmicComponent {
                 boolean returnValue = nodes[i].add(body);
                 calculateCentreOfMass(body);
                 calculateMass(body);
+
                 return returnValue;
             }
         }
@@ -87,7 +88,6 @@ public class OctreeNode implements CosmicComponent {
 
     }
 
-    // TODO: Calculate mass überarbeiten
     // calculates new Mass of the OctreeNode after adding body
     public void calculateMass(Body body) {
         /*double newMass = 0;
@@ -96,41 +96,47 @@ public class OctreeNode implements CosmicComponent {
                 newMass += nodes[i].getMass();
             }
         }*/
-        mass = mass + body.getMass();
+        mass += body.getMass();
     }
 
     // calculate new calculateCentreOfMass
     public void calculateCentreOfMass(Body body) {
         if (centreOfMass != null) {
-            centreOfMass = (centreOfMass.times(mass).plus(body.getMassCenter().times(body.getMass()))).times(1 / (mass + body.getMass()));
-            // cOMassX = (centreOfMass.getX() * mass + body.getMassCenter().getX() * body.getMass())/(mass * body.getMass());
+            Vector3 weightedCentreOfBody = body.getMassCenter().times(body.getMass());
+            centreOfMass = centreOfMass.times(mass).
+                    plus(weightedCentreOfBody).
+                    times(1 / (mass + body.getMass()));
         } else {
+            //if centreOfMass is null, f there is only one Body in this octant
             centreOfMass = body.getMassCenter();
         }
     }
 
+    //returns vector of force exerted on the input body by all other bodies in the simulation
     public Vector3 calcForceOnBody(Body body) {
-        //System.out.println("new rec " +body.getName());
         Vector3 force = new Vector3();
-        //iterates over all 8 nodes. if d/r<T there is no recursive call and the
+        Vector3 v;
+        //iterates over all 8 nodes. if d/r<T there is no recursive call and the force is not calculated but just taken
+        // from the node
         for (int i = 0; i < 8; i++) {
-            //System.out.println(i);
             if (nodes[i] != null) {
-                //System.out.println(nodes[i]);
-
-                if ((diameter / centreNodes[i].distance(body.getMassCenter())) < Simulation.T) {
-                    Vector3 v = body.gravitationalForce(nodes[i].getMass(), nodes[i].getCentre());
-                    //System.out.println( "." + v);
-                    force = force.plus(v);
+                double d = diameter;
+                double r = centreNodes[i].distance(body.getMassCenter());
+                if ( d/r < Simulation.T) {
+                    v = body.gravitationalForce(nodes[i].getMass(), nodes[i].getCentre());
                 } else {
-                    force = force.plus(nodes[i].calcForceOnBody(body));
+                    //not recursive if nodes[i] is a LeafNode, else recursive
+                    v = nodes[i].calcForceOnBody(body);
                 }
+                force = force.plus(v);
             }
         }
+
         return force;
     }
 
     public void drawTree2D() {
+        //todo
         for (int i = 0; i < 8; i++) {
             if (nodes[i] instanceof LeafNode) {
                 StdDraw.setPenColor(StdDraw.WHITE);
@@ -150,18 +156,6 @@ public class OctreeNode implements CosmicComponent {
     public Vector3 getCentre() {
         return centreOfMass;
     }
-
-    /*public Body getBody(String name) {
-        for (int i = 0; i < 8; i++) {
-            if (Nodes[i] != null) {
-                Body b = Nodes[i].getBody(name);
-                if (b != null) {
-                    return b;
-                }
-            }
-        }
-        return null;
-    }*/
     @Override
     public Body getBody() {
         return null;
