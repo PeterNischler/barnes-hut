@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.sql.SQLOutput;
 
 public class Simulation {
     // gravitational constant
@@ -9,10 +10,10 @@ public class Simulation {
 
     //dimension in all 3 axis of the CosmicCube
     //One cosmicCube has length of diameter * 2
-    public static final double Diameter = 4*AU;
+    public static final double Diameter = 50*AU;
 
     //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
-    public static final double T = 1.0;
+    public static final double T = 5;
 
     public static void main(String[] args) {
         System.out.println(Diameter/2);
@@ -23,7 +24,7 @@ public class Simulation {
         Body mars = new Body("Mars",6.41712e23,3390e3,new Vector3(-1.010178e11,-2.043939e11,-1.591727E9),new Vector3(20651.98,-10186.67,-2302.79),StdDraw.RED);
 
 
-        int n = 20; //number of bodies in simulation
+        int n = 1000; //number of bodies in simulation
         Body[] bodies = new Body[n]; //array containing all bodies in simulation
 
         bodies[0] = sun;
@@ -35,16 +36,16 @@ public class Simulation {
         //generate random bodies and add them to the array bodies
         for (int i = 5; i < n; i++){
             String name = "a" + i;
-            double mass = Math.random()*10e24 + 7.348e2; //min = mass of earths moon
-            double radius = (Math.random()*6371e3) + 1737.5; // max = earth , min = radius of earths moon
+            double mass = Math.random()*10e26 + 7.348e2; //min = mass of earths moon
+            double radius = (Math.random()*100000e3) + 1737.5e2; // max = earth , min = radius of earths moon
             Vector3 position = new Vector3(
-                    ((Math.random()*Diameter)-(Diameter/2)),
-                    ((Math.random()*Diameter)-(Diameter/2)),
-                    ((Math.random()*Diameter)-(Diameter/2)));
+                    ((Math.random()*Diameter)-(Diameter/2)) * Math.pow(Math.random(),1.1),
+                    ((Math.random()*Diameter)-(Diameter/2)) * Math.pow(Math.random(),1.1),
+                    ((Math.random()*Diameter)-(Diameter/2))* Math.pow(Math.random(),1.1));
             Vector3 currentMovement = new Vector3(
-                    ((Math.random()*30000/2)),
-                    ((Math.random()*30000/2)),
-                    ((Math.random()*30000/2)));
+                    ((Math.random()*300000 - 300000/2)),
+                    ((Math.random()*300000 - 300000/2)),
+                    ((Math.random()*300000 - 300000/2)));
             bodies[i] = new Body(name, mass, radius, position, currentMovement, StdDraw.LIGHT_GRAY);
 
         }
@@ -60,6 +61,7 @@ public class Simulation {
 
         // simulation loop
         while(true) {
+            //long startTime = System.nanoTime();
             if (seconds >= 1){
                 //break; // uncomment this line to stop after 5 seconds
             }
@@ -71,18 +73,28 @@ public class Simulation {
                 system.add(bodies[i]);
             }
 
+            //long octreeTime = System.nanoTime();
+            //System.out.println("Octree:");
+            //System.out.println(octreeTime - startTime);
+
             // calc force on bodies and save result in body
             for (int i = 0; i < n; i++){
                 bodies[i].setForce(system.calcForceOnBody(bodies[i]));
             }
 
-            //visualize Octree
-            //system.drawTree2D();
+            //long forceTime = System.nanoTime();
+            //System.out.println("Force:");
+            //System.out.println(forceTime - octreeTime);
+
 
             // for each body (with index i): move it according to the total force exerted on it.
             for (int i = 0; i < n; i++){
                 bodies[i].move();
             }
+
+            //long moveTime = System.nanoTime();
+            //System.out.println("Move:");
+            //System.out.println(moveTime - forceTime);
 
             // show all movements in StdDraw canvas only every 3 hours (to speed up the simulation)
             if (seconds%(3*3600) == 0) {
@@ -96,6 +108,10 @@ public class Simulation {
                 // show new positions
                 StdDraw.show();
             }
+
+            //long restTime = System.nanoTime();
+            //System.out.println("Rest:");
+            //System.out.println(restTime - moveTime);
         }
     }
 

@@ -6,7 +6,7 @@ public interface CosmicComponent {
 
    Vector3 calcForceOnBody(Body body);
 
-   public void drawTree2D();
+   //public void drawTree2D();
 
    public double getMass();
    public Vector3 getCentre();
