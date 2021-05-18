@@ -1,6 +1,6 @@
 public class OctreeNode implements CosmicComponent {
     private Vector3 centre;
-    private double diameter; //diameter of octant = edge length
+    private final double diameter; //diameter of octant = edge length
     //ungerade bei x minus, gerade x immer plus
     //1-4 bei y immer plus, 5-8 bei y immer minus
     //1,2,5,6 bei z plus, 3,4,7,8 bei z minus

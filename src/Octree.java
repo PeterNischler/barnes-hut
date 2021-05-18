@@ -1,11 +1,6 @@
-import jdk.dynalink.linker.support.SimpleLinkRequest;
-
-import javax.management.ValueExp;
-import java.awt.*;
-
 public class Octree {
     private String name;
-    private double diameter;
+    private final double diameter;
     private Vector3 centre = new Vector3(0, 0, 0);
     private Vector3[] centreNodes = new Vector3[]{centre.plus(new Vector3(-Simulation.Diameter / 4, Simulation.Diameter / 4, Simulation.Diameter / 4)),
             centre.plus(new Vector3(Simulation.Diameter / 4, Simulation.Diameter / 4, Simulation.Diameter / 4)),
@@ -26,7 +21,6 @@ public class Octree {
     // If that is not the case false is returned.
     // the body will be added to one of the 8 octreenodes, representing the 8 cubes into which the larger cube is divided.
     public Boolean add(Body body) {
-        //System.out.println(body.getName());
         if (!body.insideOfBoundary(diameter, centre)) {
             return false;
         }
