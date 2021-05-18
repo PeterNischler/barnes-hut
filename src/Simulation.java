@@ -9,10 +9,10 @@ public class Simulation {
 
     //dimension in all 3 axis of the CosmicCube
     //One cosmicCube has length of diameter * 2
-    public static final double Diameter = 4*AU;
+    public static final double Diameter = 50*AU;
 
     //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
-    public static final double T = 100.0;
+    public static final double T = 5.0;
 
     public static void main(String[] args) {
         Body sun = new Body("Sol", 1.989e30, 696340e3, new Vector3(0,0,0), new Vector3(0,0,0), StdDraw.YELLOW);
@@ -37,13 +37,13 @@ public class Simulation {
             double mass = Math.random()*10e24 + 7.348e2; //min = mass of earths moon
             double radius = (Math.random()*6371e3) + 1737.5; // max = earth , min = radius of earths moon
             Vector3 position = new Vector3(
-                    ((Math.random()*Diameter)-(Diameter/2)),
-                    ((Math.random()*Diameter)-(Diameter/2)),
-                    ((Math.random()*Diameter)-(Diameter/2)));
+                    ((Math.random()*Diameter)-(Diameter/2)) * Math.pow(Math.random(),1.1),
+                    ((Math.random()*Diameter)-(Diameter/2)) * Math.pow(Math.random(),1.1),
+                    ((Math.random()*Diameter)-(Diameter/2)) * Math.pow(Math.random(),1.1));
             Vector3 currentMovement = new Vector3(
-                    ((Math.random()*30000/2)),
-                    ((Math.random()*30000/2)),
-                    ((Math.random()*30000/2)));
+                    ((Math.random()*300000 - 300000/2)),
+                    ((Math.random()*300000 - 300000/2)),
+                    ((Math.random()*300000 - 300000/2)));
             bodies[i] = new Body(name, mass, radius, position, currentMovement, StdDraw.LIGHT_GRAY);
 
         }
