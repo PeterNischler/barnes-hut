@@ -105,17 +105,8 @@ public class Octree {
             }
         }
     }
-
-    public Boolean remove(Body body) {
-        return false;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public int size() {
-        return 0;
     }
 
     public String toString() {

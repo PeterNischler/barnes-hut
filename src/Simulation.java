@@ -13,7 +13,7 @@ public class Simulation {
     public static final double Diameter = 50*AU;
 
     //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
-    public static final double T = 5;
+    public static final double T = 1;
 
     public static void main(String[] args) {
         System.out.println(Diameter/2);
