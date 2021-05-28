@@ -26,7 +26,7 @@ public class OctreeNode implements CosmicComponent {
     // adds a body to one of the 8 octreenodes. After the body is added both centreOfMass and mass of the current node is
     public Boolean add(Body body) {
         //System.out.println(body.getName());
-        for (int i = 0; i < 8; i++) {
+        /*for (int i = 0; i < 8; i++) {
             if (body.insideOfBoundary(diameter / 2, centreNodes[i])) {
                 if (nodes[i] == null) {
                     nodes[i] = new LeafNode();
@@ -41,9 +41,9 @@ public class OctreeNode implements CosmicComponent {
                 return returnValue;
             }
         }
-        return false;
+        return false;*/
         // slightly mor efficient implementation
-        /*Vector3 position = body.getMassCenter().minus(centre);
+        Vector3 position = body.getMassCenter().minus(centre);
         int cubeNumber;
         if (position.getX() >= 0) {
             if (position.getY() >= 0) {
@@ -84,9 +84,9 @@ public class OctreeNode implements CosmicComponent {
         boolean returnValue = nodes[cubeNumber].add(body);
         calculateCentreOfMass(body);
         calculateMass(body);
-        return returnValue;*/
-
+        return returnValue;
     }
+
 
 
     // calculates new Mass of the OctreeNode after a body was added

@@ -9,10 +9,10 @@ public class Simulation {
 
     //dimension in all 3 axis of the CosmicCube
     //One cosmicCube has length of diameter * 2
-    public static final double Diameter = 50*AU;
+    public static final double Diameter = 10*AU;
 
     //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
-    public static final double T = 5.0;
+    public static final double T = 1.0;
 
     public static void main(String[] args) {
         Body sun = new Body("Sol", 1.989e30, 696340e3, new Vector3(0,0,0), new Vector3(0,0,0), StdDraw.YELLOW);
@@ -22,7 +22,7 @@ public class Simulation {
         Body mars = new Body("Mars",6.41712e23,3390e3,new Vector3(-1.010178e11,-2.043939e11,-1.591727E9),new Vector3(20651.98,-10186.67,-2302.79),StdDraw.RED);
 
 
-        int n = 1000; //number of bodies in simulation
+        int n = 20; //number of bodies in simulation
         Body[] bodies = new Body[n]; //array containing all bodies in simulation
 
         bodies[0] = sun;

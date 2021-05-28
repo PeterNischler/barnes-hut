@@ -24,7 +24,7 @@ public class Octree {
         if (!body.insideOfBoundary(diameter, centre)) {
             return false;
         }
-        for (int i = 0; i < 8; i++) {
+        /*for (int i = 0; i < 8; i++) {
             if (body.insideOfBoundary(diameter / 2, centreNodes[i])) {
                 if (nodes[i] == null) {
                     nodes[i] = new LeafNode();
@@ -36,9 +36,9 @@ public class Octree {
                 return nodes[i].add(body);
             }
         }
-        return false;
+        return false;*/
         //slightly more efficient implementation
-        /*Vector3 position = body.getMassCenter();
+        Vector3 position = body.getMassCenter();
         int cubeNumber;
         if (position.getX() >= 0) {
             if (position.getY() >= 0) {
@@ -76,7 +76,52 @@ public class Octree {
             nodes[cubeNumber] = new OctreeNode( diameter / 2, centreNodes[cubeNumber]);
             nodes[cubeNumber].add(otherBody);
         }
-        return nodes[cubeNumber].add(body);*/
+        return nodes[cubeNumber].add(body);
+    }
+
+    public boolean add(Body[] bodies){
+        // noch gescheiter wäre es eine array zu machen, welches dann nach xyz sortiert wird, sodass man das array einfach immer entsprechend der position teilen muss
+        BodyStack cube0 = new BodyStack();
+        BodyStack cube1 = new BodyStack();
+        BodyStack cube2 = new BodyStack();
+        BodyStack cube3 = new BodyStack();
+        BodyStack cube4 = new BodyStack();
+        BodyStack cube5 = new BodyStack();
+        BodyStack cube6 = new BodyStack();
+        BodyStack cube7 = new BodyStack();
+
+        for (int i = 0; i < bi.length ; i++) {
+            Vector3 position = bi[i].getMassCenter();
+            if (position.getX() >= 0) {
+                if (position.getY() >= 0) {
+                    if (position.getZ() >= 0) {
+                        cube1[i] = bi[i];
+                    } else {
+                        cubeNumber = 3;
+                    }
+                } else {
+                    if (position.getZ() >= 0) {
+                        cubeNumber = 5;
+                    } else {
+                        cubeNumber = 7;
+                    }
+                }
+            } else {
+                if (position.getY() >= 0) {
+                    if (position.getZ() >= 0) {
+                        cubeNumber = 0;
+                    } else {
+                        cubeNumber = 2;
+                    }
+                } else {
+                    if (position.getZ() >= 0) {
+                        cubeNumber = 4;
+                    } else {
+                        cubeNumber = 6;
+                    }
+                }
+            }
+        }
     }
 
     //returns vector of force exerted by all other bodies on the input body
