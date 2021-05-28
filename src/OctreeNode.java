@@ -22,8 +22,9 @@ public class OctreeNode implements CosmicComponent {
     }
 
 
-    @Override
+
     // adds a body to one of the 8 octreenodes. After the body is added both centreOfMass and mass of the current node is
+    @Override
     public Boolean add(Body body) {
         //System.out.println(body.getName());
         /*for (int i = 0; i < 8; i++) {
@@ -87,6 +88,52 @@ public class OctreeNode implements CosmicComponent {
         return returnValue;
     }
 
+    /*public boolean add(BodyStack bodies){
+        // noch gescheiter wäre es eine array zu machen, welches dann nach xyz sortiert wird, sodass man das array einfach immer entsprechend der position teilen muss
+        BodyStack cube0 = new BodyStack();
+        BodyStack cube1 = new BodyStack();
+        BodyStack cube2 = new BodyStack();
+        BodyStack cube3 = new BodyStack();
+        BodyStack cube4 = new BodyStack();
+        BodyStack cube5 = new BodyStack();
+        BodyStack cube6 = new BodyStack();
+        BodyStack cube7 = new BodyStack();
+
+        while(bodies.peek() != null) {
+            Vector3 position = bodies.peek().getMassCenter();
+            if (position.getX() >= 0) {
+                if (position.getY() >= 0) {
+                    if (position.getZ() >= 0) {
+                        cube1.push(bodies.pop());
+                    } else {
+                        cube3.push(bodies.pop());
+                    }
+                } else {
+                    if (position.getZ() >= 0) {
+                        cube5.push(bodies.pop());
+                    } else {
+                        cube7.push(bodies.pop());
+                    }
+                }
+            } else {
+                if (position.getY() >= 0) {
+                    if (position.getZ() >= 0) {
+                        cube0.push(bodies.pop());
+                    } else {
+                        cube2.push(bodies.pop());
+                    }
+                } else {
+                    if (position.getZ() >= 0) {
+                        cube4.push(bodies.pop());
+                    } else {
+                        cube6.push(bodies.pop());
+                    }
+                }
+            }
+        }
+        return nodes[0].add(cube0) && nodes[1].add(cube1) && nodes[2].add(cube2) && nodes[3].add(cube3) &&
+                nodes[4].add(cube4) && nodes[5].add(cube5) && nodes[6].add(cube6) && nodes[7].add(cube7);
+    }*/
 
 
     // calculates new Mass of the OctreeNode after a body was added

@@ -79,7 +79,7 @@ public class Octree {
         return nodes[cubeNumber].add(body);
     }
 
-    public boolean add(Body[] bodies){
+    /*public boolean add(Body[] bodies){
         // noch gescheiter wäre es eine array zu machen, welches dann nach xyz sortiert wird, sodass man das array einfach immer entsprechend der position teilen muss
         BodyStack cube0 = new BodyStack();
         BodyStack cube1 = new BodyStack();
@@ -90,39 +90,41 @@ public class Octree {
         BodyStack cube6 = new BodyStack();
         BodyStack cube7 = new BodyStack();
 
-        for (int i = 0; i < bi.length ; i++) {
-            Vector3 position = bi[i].getMassCenter();
+        for (int i = 0; i < bodies.length ; i++) {
+            Vector3 position = bodies[i].getMassCenter();
             if (position.getX() >= 0) {
                 if (position.getY() >= 0) {
                     if (position.getZ() >= 0) {
-                        cube1[i] = bi[i];
+                        cube1.push(bodies[i]);
                     } else {
-                        cubeNumber = 3;
+                        cube3.push(bodies[i]);
                     }
                 } else {
                     if (position.getZ() >= 0) {
-                        cubeNumber = 5;
+                        cube5.push(bodies[i]);
                     } else {
-                        cubeNumber = 7;
+                        cube7.push(bodies[i]);
                     }
                 }
             } else {
                 if (position.getY() >= 0) {
                     if (position.getZ() >= 0) {
-                        cubeNumber = 0;
+                        cube0.push(bodies[i]);
                     } else {
-                        cubeNumber = 2;
+                        cube2.push(bodies[i]);
                     }
                 } else {
                     if (position.getZ() >= 0) {
-                        cubeNumber = 4;
+                        cube4.push(bodies[i]);
                     } else {
-                        cubeNumber = 6;
+                        cube6.push(bodies[i]);
                     }
                 }
             }
         }
-    }
+        return nodes[0].add(cube0) && nodes[1].add(cube1) && nodes[2].add(cube2) && nodes[3].add(cube3) &&
+                nodes[4].add(cube4) && nodes[5].add(cube5) && nodes[6].add(cube6) && nodes[7].add(cube7);
+    }*/
 
     //returns vector of force exerted by all other bodies on the input body
     public Vector3 calcForceOnBody(Body body) {
