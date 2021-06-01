@@ -122,6 +122,10 @@ public class Octree {
                 }
             }
         }
+        for (int i = 0; i < 8; i++) {
+            nodes[i] = new OctreeNode(diameter / 2, centreNodes[i]);
+
+        }
         return nodes[0].add(cube0) && nodes[1].add(cube1) && nodes[2].add(cube2) && nodes[3].add(cube3) &&
                 nodes[4].add(cube4) && nodes[5].add(cube5) && nodes[6].add(cube6) && nodes[7].add(cube7);
     }*/

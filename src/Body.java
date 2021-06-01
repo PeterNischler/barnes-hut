@@ -117,8 +117,20 @@ public class Body {
         return mass;
     }
 
+    public void setMass(double mass) {
+        this.mass = mass;
+    }
+
     public Vector3 getMassCenter() {
         return position;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
     }
 
     public void setForce(Vector3 forceOnBody) {

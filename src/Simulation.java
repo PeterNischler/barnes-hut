@@ -9,7 +9,7 @@ public class Simulation {
 
     //dimension in all 3 axis of the CosmicCube
     //One cosmicCube has length of diameter * 2
-    public static final double Diameter = 10*AU;
+    public static final double Diameter = 50*AU;
 
     //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
     public static final double T = 1.0;
@@ -21,8 +21,7 @@ public class Simulation {
         Body venus = new Body("Venus",4.86747e24,6052e3,new Vector3(-1.707667e10,1.066132e11,2.450232e9),new Vector3(-34446.02,-5567.47,2181.10),StdDraw.PINK);
         Body mars = new Body("Mars",6.41712e23,3390e3,new Vector3(-1.010178e11,-2.043939e11,-1.591727E9),new Vector3(20651.98,-10186.67,-2302.79),StdDraw.RED);
 
-
-        int n = 20; //number of bodies in simulation
+        int n = 200; //number of bodies in simulation
         Body[] bodies = new Body[n]; //array containing all bodies in simulation
 
         bodies[0] = sun;
@@ -31,10 +30,11 @@ public class Simulation {
         bodies[3] = mercury;
         bodies[4] = mars;
 
+
         //generate random bodies and add them to the array bodies
         for (int i = 5; i < n; i++){
             String name = "a" + i;
-            double mass = Math.random()*10e24 + 7.348e2; //min = mass of earths moon
+            double mass = Math.random()*1e40 + 1e30; //min = mass of earths moon
             double radius = (Math.random()*6371e3) + 1737.5; // max = earth , min = radius of earths moon
             Vector3 position = new Vector3(
                     ((Math.random()*Diameter)-(Diameter/2)) * Math.pow(Math.random(),1.1),
@@ -64,21 +64,15 @@ public class Simulation {
             }
             seconds++; // each iteration computes the movement of the celestial bodies within one second.
 
-            // delete bodies from array, wich have left the simulation
-            for (int i = 0; i < n; i++){
-                if (bodies[i] != null) {
-                    if (!bodies[i].insideOfBoundary(Diameter, new Vector3(0, 0, 0))) {
-                        System.out.println("Body \"" + bodies[i].getName() + "\" removed from the simulation.");
-                        bodies[i] = null;
-                    }
-                }
-            }
-
-            //create new octree and add bodies
+            //create new octree and adds all elements from bodies to it.
+            // If one Element cannot be added it is removed from bodies.
             Octree system = new Octree("system");
             for (int i = 0; i < n; i++){
                 if (bodies[i] != null){
-                    system.add(bodies[i]);
+                   if(system.add(bodies[i]) == false){
+                       System.out.println("Body \"" + bodies[i].getName() + "\" removed from the simulation.");
+                       bodies[i] = null;
+                   };
                 }
             }
 

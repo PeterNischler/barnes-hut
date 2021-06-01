@@ -4,6 +4,8 @@ public interface CosmicComponent {
 
    public Boolean add(Body body);
 
+   //public Boolean add(BodyStack bodies);
+
    Vector3 calcForceOnBody(Body body);
 
    //public void drawTree2D();

@@ -37,6 +37,17 @@ public class BodyStack {
         }
     }
 
+    public Boolean moreThanOneBody() {
+        if (head == null) {
+            return true;
+        }
+        if (head.next.next != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public class StackNode {
         private Body body;
         private StackNode next;

@@ -12,7 +12,7 @@ public class OctreeNode implements CosmicComponent {
     public OctreeNode(double diameter, Vector3 centre) {
         this.diameter = diameter;
         this.centre = centre;
-        centreNodes = new Vector3[]{new Vector3(new Vector3(-diameter / 4, diameter / 4, diameter / 4)), centre.plus(new Vector3(diameter / 4, diameter / 4, diameter / 4)),
+        centreNodes = new Vector3[]{centre.plus(new Vector3(-diameter / 4, diameter / 4, diameter / 4)), centre.plus(new Vector3(diameter / 4, diameter / 4, diameter / 4)),
                 centre.plus(new Vector3(-diameter / 4, diameter / 4, -diameter / 4)),
                 centre.plus(new Vector3(diameter / 4, diameter / 4, -diameter / 4)),
                 centre.plus(new Vector3(-diameter / 4, -diameter / 4, diameter / 4)),
@@ -88,51 +88,56 @@ public class OctreeNode implements CosmicComponent {
         return returnValue;
     }
 
-    /*public boolean add(BodyStack bodies){
+    /*public Boolean add(BodyStack bodies){
         // noch gescheiter wäre es eine array zu machen, welches dann nach xyz sortiert wird, sodass man das array einfach immer entsprechend der position teilen muss
-        BodyStack cube0 = new BodyStack();
-        BodyStack cube1 = new BodyStack();
-        BodyStack cube2 = new BodyStack();
-        BodyStack cube3 = new BodyStack();
-        BodyStack cube4 = new BodyStack();
-        BodyStack cube5 = new BodyStack();
-        BodyStack cube6 = new BodyStack();
-        BodyStack cube7 = new BodyStack();
+        BodyStack[] cube = new BodyStack[8];
 
         while(bodies.peek() != null) {
             Vector3 position = bodies.peek().getMassCenter();
             if (position.getX() >= 0) {
                 if (position.getY() >= 0) {
                     if (position.getZ() >= 0) {
-                        cube1.push(bodies.pop());
+                        cube[1].push(bodies.pop());
                     } else {
-                        cube3.push(bodies.pop());
+                        cube[3].push(bodies.pop());
                     }
                 } else {
                     if (position.getZ() >= 0) {
-                        cube5.push(bodies.pop());
+                        cube[5].push(bodies.pop());
                     } else {
-                        cube7.push(bodies.pop());
+                        cube[7].push(bodies.pop());
                     }
                 }
             } else {
                 if (position.getY() >= 0) {
                     if (position.getZ() >= 0) {
-                        cube0.push(bodies.pop());
+                        cube[0].push(bodies.pop());
                     } else {
-                        cube2.push(bodies.pop());
+                        cube[2].push(bodies.pop());
                     }
                 } else {
                     if (position.getZ() >= 0) {
-                        cube4.push(bodies.pop());
+                        cube[4].push(bodies.pop());
                     } else {
-                        cube6.push(bodies.pop());
+                        cube[6].push(bodies.pop());
                     }
                 }
             }
         }
-        return nodes[0].add(cube0) && nodes[1].add(cube1) && nodes[2].add(cube2) && nodes[3].add(cube3) &&
-                nodes[4].add(cube4) && nodes[5].add(cube5) && nodes[6].add(cube6) && nodes[7].add(cube7);
+        Boolean returnValue = true;
+        for (int i = 8; i < cube.length; i++) {
+            if (cube[i].peek() == null){
+
+            }
+            else if (nodes[i] == null && !cube[i].moreThanOneBody()){
+                nodes[i] = new LeafNode();
+            }
+            else {
+                nodes[i] = new OctreeNode(diameter / 2, centreNodes[i]);
+            }
+            returnValue = returnValue && nodes[i].add(cube[i]);
+        }
+        return returnValue;
     }*/
 
 
