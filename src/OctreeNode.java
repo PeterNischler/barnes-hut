@@ -161,7 +161,7 @@ public class OctreeNode implements CosmicComponent {
         //iterates over all 8 nodes. if d/r<T there is no recursive call and the
         for (int i = 0; i < 8; i++) {
             if (nodes[i] != null) {
-                if ((diameter / centreNodes[i].distance(body.getMassCenter())) < Simulation.T) {
+                if (((diameter/2) / centreNodes[i].distance(body.getMassCenter())) < Simulation.T) {
                     Vector3 v = body.gravitationalForce(nodes[i].getMass(), nodes[i].getCentre());
                     //System.out.println( "." + v);
                     force = force.plus(v);
