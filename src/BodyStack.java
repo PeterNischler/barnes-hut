@@ -40,7 +40,7 @@ public class BodyStack {
 
     public Boolean moreThanOneBody() {
         if (head == null) {
-            return true;
+            return false;
         }
         if (head.next.next != null) {
             return true;

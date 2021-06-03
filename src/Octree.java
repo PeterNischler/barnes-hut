@@ -73,13 +73,13 @@ public class Octree {
             nodes[cubeNumber] = new LeafNode();
         } else if (nodes[cubeNumber] instanceof LeafNode) {
             Body otherBody = nodes[cubeNumber].getBody();
-            nodes[cubeNumber] = new OctreeNode( diameter / 2, centreNodes[cubeNumber]);
+            nodes[cubeNumber] = new OctreeNode(diameter / 2, centreNodes[cubeNumber]);
             nodes[cubeNumber].add(otherBody);
         }
         return nodes[cubeNumber].add(body);
     }
 
-    /*public boolean add(Body[] bodies){
+    public void add2(Body[] bodies) {
         // noch gescheiter wäre es eine array zu machen, welches dann nach xyz sortiert wird, sodass man das array einfach immer entsprechend der position teilen muss
         BodyStack cube0 = new BodyStack();
         BodyStack cube1 = new BodyStack();
@@ -90,7 +90,7 @@ public class Octree {
         BodyStack cube6 = new BodyStack();
         BodyStack cube7 = new BodyStack();
 
-        for (int i = 0; i < bodies.length ; i++) {
+        for (int i = 0; i < bodies.length; i++) {
             Vector3 position = bodies[i].getMassCenter();
             if (position.getX() >= 0) {
                 if (position.getY() >= 0) {
@@ -122,13 +122,17 @@ public class Octree {
                 }
             }
         }
+        BodyStack cubes[] = new BodyStack[]{cube0, cube1, cube2, cube3, cube4, cube5, cube6, cube7};
         for (int i = 0; i < 8; i++) {
-            nodes[i] = new OctreeNode(diameter / 2, centreNodes[i]);
-
+            if (cubes[i].moreThanOneBody() == false && cubes[i].peek() != null) {
+                nodes[i] = new LeafNode();
+                nodes[i].add(cubes[i]);
+            } else if (cubes[i].peek() != null) {
+                nodes[i] = new OctreeNode(diameter / 2, centreNodes[i]);
+                nodes[i].add(cubes[i]);
+            }
         }
-        return nodes[0].add(cube0) && nodes[1].add(cube1) && nodes[2].add(cube2) && nodes[3].add(cube3) &&
-                nodes[4].add(cube4) && nodes[5].add(cube5) && nodes[6].add(cube6) && nodes[7].add(cube7);
-    }*/
+    }
 
     //returns vector of force exerted by all other bodies on the input body
     public Vector3 calcForceOnBody(Body body) {
@@ -150,16 +154,17 @@ public class Octree {
             }
         }
     }
+
     public String getName() {
         return name;
     }
 
     public String toString() {
         String returnValue = "<Octree: ";
-        for (int i = 0; i < 8 ; i++) {
-            if(nodes[i] == null){
+        for (int i = 0; i < 8; i++) {
+            if (nodes[i] == null) {
                 returnValue = returnValue + i + "empty\n";
-            }else {
+            } else {
                 returnValue = returnValue + nodes[i].toString() + "\n";
             }
 

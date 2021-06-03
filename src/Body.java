@@ -47,6 +47,7 @@ public class Body {
     public Vector3 gravitationalForce(Body body) {
         return gravitationalForce(body.mass, body.position);
     }
+
     //Returns a vector representing the gravitational force exerted by the entity with 'mass' and 'position' on this body.
     //The gravitational Force F is calculated by F = G*(m1*m2)/(r*r), with m1 and m2 being the masses of the objects
     //interacting, r being the distance between the centers of the masses and G being the gravitational constant.
@@ -59,7 +60,18 @@ public class Body {
         Vector3 direction = position.minus(this.position);
         double distance = direction.length();
         direction.normalize();
-        double force = Simulation.G * this.mass * mass / (distance * distance);
+        double force = 0;
+        /*if (distance >= 1) {
+            force = Simulation.G * this.mass * mass / (distance * distance);
+        } else {
+            force = Simulation.G * this.mass * mass;
+        }*/
+        // alternativ stellen wir die distanz auf mindestens den radius, da wir keine Kollisionsberechnung durchführen
+        // und so das entstheen von zu großen Kräften vermeiden können;
+        if (distance < radius){
+            distance = radius;
+        }
+        force = Simulation.G * this.mass * mass / (distance * distance);
         return direction.times(force);
     }
 

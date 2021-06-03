@@ -22,7 +22,6 @@ public class OctreeNode implements CosmicComponent {
     }
 
 
-
     // adds a body to one of the 8 octreenodes. After the body is added both centreOfMass and mass of the current node is
     @Override
     public Boolean add(Body body) {
@@ -88,57 +87,52 @@ public class OctreeNode implements CosmicComponent {
         return returnValue;
     }
 
-    /*public Boolean add(BodyStack bodies){
+    public void add(BodyStack bodies) {
         // noch gescheiter wäre es eine array zu machen, welches dann nach xyz sortiert wird, sodass man das array einfach immer entsprechend der position teilen muss
-        BodyStack[] cube = new BodyStack[8];
+        BodyStack[] cubes = new BodyStack[8];
 
-        while(bodies.peek() != null) {
+        while (bodies.peek() != null) {
             Vector3 position = bodies.peek().getMassCenter();
             if (position.getX() >= 0) {
                 if (position.getY() >= 0) {
                     if (position.getZ() >= 0) {
-                        cube[1].push(bodies.pop());
+                        cubes[1].push(bodies.pop());
                     } else {
-                        cube[3].push(bodies.pop());
+                        cubes[3].push(bodies.pop());
                     }
                 } else {
                     if (position.getZ() >= 0) {
-                        cube[5].push(bodies.pop());
+                        cubes[5].push(bodies.pop());
                     } else {
-                        cube[7].push(bodies.pop());
+                        cubes[7].push(bodies.pop());
                     }
                 }
             } else {
                 if (position.getY() >= 0) {
                     if (position.getZ() >= 0) {
-                        cube[0].push(bodies.pop());
+                        cubes[0].push(bodies.pop());
                     } else {
-                        cube[2].push(bodies.pop());
+                        cubes[2].push(bodies.pop());
                     }
                 } else {
                     if (position.getZ() >= 0) {
-                        cube[4].push(bodies.pop());
+                        cubes[4].push(bodies.pop());
                     } else {
-                        cube[6].push(bodies.pop());
+                        cubes[6].push(bodies.pop());
                     }
                 }
             }
         }
-        Boolean returnValue = true;
-        for (int i = 8; i < cube.length; i++) {
-            if (cube[i].peek() == null){
-
-            }
-            else if (nodes[i] == null && !cube[i].moreThanOneBody()){
+        for (int i = 0; i < 8; i++) {
+            if (cubes[i].moreThanOneBody() == false && cubes[i].peek() != null) {
                 nodes[i] = new LeafNode();
-            }
-            else {
+                nodes[i].add(cubes[i]);
+            } else if (cubes[i].peek() != null) {
                 nodes[i] = new OctreeNode(diameter / 2, centreNodes[i]);
+                nodes[i].add(cubes[i]);
             }
-            returnValue = returnValue && nodes[i].add(cube[i]);
         }
-        return returnValue;
-    }*/
+    }
 
 
     // calculates new Mass of the OctreeNode after a body was added
@@ -161,7 +155,7 @@ public class OctreeNode implements CosmicComponent {
         //iterates over all 8 nodes. if d/r<T there is no recursive call and the
         for (int i = 0; i < 8; i++) {
             if (nodes[i] != null) {
-                if (((diameter/2) / centreNodes[i].distance(body.getMassCenter())) < Simulation.T) {
+                if (((diameter / 2) / centreNodes[i].distance(body.getMassCenter())) < Simulation.T) {
                     Vector3 v = body.gravitationalForce(nodes[i].getMass(), nodes[i].getCentre());
                     //System.out.println( "." + v);
                     force = force.plus(v);
