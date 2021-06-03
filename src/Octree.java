@@ -2,14 +2,15 @@ public class Octree {
     private String name;
     private final double diameter;
     private Vector3 centre = new Vector3(0, 0, 0);
-    private Vector3[] centreNodes = new Vector3[]{centre.plus(new Vector3(-Simulation.Diameter / 4, Simulation.Diameter / 4, Simulation.Diameter / 4)),
-            centre.plus(new Vector3(Simulation.Diameter / 4, Simulation.Diameter / 4, Simulation.Diameter / 4)),
-            centre.plus(new Vector3(-Simulation.Diameter / 4, Simulation.Diameter / 4, -Simulation.Diameter / 4)),
-            centre.plus(new Vector3(Simulation.Diameter / 4, Simulation.Diameter / 4, -Simulation.Diameter / 4)),
-            centre.plus(new Vector3(-Simulation.Diameter / 4, -Simulation.Diameter / 4, Simulation.Diameter / 4)),
-            centre.plus(new Vector3(Simulation.Diameter / 4, -Simulation.Diameter / 4, Simulation.Diameter / 4)),
-            centre.plus(new Vector3(-Simulation.Diameter / 4, -Simulation.Diameter / 4, -Simulation.Diameter / 4)),
-            centre.plus(new Vector3(Simulation.Diameter / 4, -Simulation.Diameter / 4, -Simulation.Diameter / 4)),};
+    private double c = Simulation.Diameter/4;
+    private Vector3[] centreNodes = new Vector3[]{centre.plus(new Vector3(-c, c, c)),
+            centre.plus(new Vector3(c, c, c)),
+            centre.plus(new Vector3(-c, c, -c)),
+            centre.plus(new Vector3(c, c, -c)),
+            centre.plus(new Vector3(-c, -c, c)),
+            centre.plus(new Vector3(c, -c, c)),
+            centre.plus(new Vector3(-c, -c, -c)),
+            centre.plus(new Vector3(c, -c, -c)),};
     private CosmicComponent[] nodes = new CosmicComponent[8];
 
     public Octree(String name) {
@@ -79,6 +80,7 @@ public class Octree {
         return nodes[cubeNumber].add(body);
     }
 
+    // fügt ein Array an bodies auf einmal hinzu
     public void add2(Body[] bodies) {
         // noch gescheiter wäre es eine array zu machen, welches dann nach xyz sortiert wird, sodass man das array einfach immer entsprechend der position teilen muss
         BodyStack cube0 = new BodyStack();

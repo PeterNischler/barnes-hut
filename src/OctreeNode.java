@@ -12,13 +12,14 @@ public class OctreeNode implements CosmicComponent {
     public OctreeNode(double diameter, Vector3 centre) {
         this.diameter = diameter;
         this.centre = centre;
-        centreNodes = new Vector3[]{centre.plus(new Vector3(-diameter / 4, diameter / 4, diameter / 4)), centre.plus(new Vector3(diameter / 4, diameter / 4, diameter / 4)),
-                centre.plus(new Vector3(-diameter / 4, diameter / 4, -diameter / 4)),
-                centre.plus(new Vector3(diameter / 4, diameter / 4, -diameter / 4)),
-                centre.plus(new Vector3(-diameter / 4, -diameter / 4, diameter / 4)),
-                centre.plus(new Vector3(diameter / 4, -diameter / 4, diameter / 4)),
-                centre.plus(new Vector3(-diameter / 4, -diameter / 4, -diameter / 4)),
-                centre.plus(new Vector3(diameter / 4, -diameter / 4, -diameter / 4)),};
+        double c = diameter/4;
+        centreNodes = new Vector3[]{centre.plus(new Vector3(-c, c, c)), centre.plus(new Vector3(c, c, c)),
+                centre.plus(new Vector3(-c, c, -c)),
+                centre.plus(new Vector3(c, c, -c)),
+                centre.plus(new Vector3(-c, -c, c)),
+                centre.plus(new Vector3(c, -c, c)),
+                centre.plus(new Vector3(-c, -c, -c)),
+                centre.plus(new Vector3(c, -c, -c)),};
     }
 
 
