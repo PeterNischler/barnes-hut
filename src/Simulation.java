@@ -117,7 +117,6 @@ public class Simulation {
                 }
                 // show new positions
                 StdDraw.show();
-                System.out.println("show movement");
             }
         }
     }

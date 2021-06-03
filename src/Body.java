@@ -59,6 +59,9 @@ public class Body {
         }
         Vector3 direction = position.minus(this.position);
         double distance = direction.length();
+        if (distance < radius){
+            distance = radius;
+        }
         direction.normalize();
         double force = 0;
         /*if (distance >= 1) {
@@ -157,6 +160,10 @@ public class Body {
             return false;
         }
         return true;
+    }
+
+    public Vector3 getForceOnBody(){
+        return forceOnBody;
     }
 }
 
