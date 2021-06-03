@@ -21,7 +21,7 @@ public class Simulation {
         Body venus = new Body("Venus",4.86747e24,6052e3,new Vector3(-1.707667e10,1.066132e11,2.450232e9),new Vector3(-34446.02,-5567.47,2181.10),StdDraw.PINK);
         Body mars = new Body("Mars",6.41712e23,3390e3,new Vector3(-1.010178e11,-2.043939e11,-1.591727E9),new Vector3(20651.98,-10186.67,-2302.79),StdDraw.RED);
 
-        int n = 100; //number of bodies in simulation
+        int n = 1000; //number of bodies in simulation
         Body[] bodies = new Body[n]; //array containing all bodies in simulation
 
         bodies[0] = sun;
