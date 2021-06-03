@@ -30,20 +30,30 @@ public class Simulation {
         bodies[3] = mercury;
         bodies[4] = mars;
 
+        double masses[] = new double[]{1e39, 1e38, 1e37, 1e36, 1e35, 1e34, 1e33, 1e32, 1e31, 1e30};
+        double radii[] = new double[]{1e5, 1e5, 1e5, 1e4, 1e4, 1e4, 1e4, 1e3, 1e3, 1e3};
+        double movements[] = new double[]{30000, -30000};
 
         //generate random bodies and add them to the array bodies
         for (int i = 5; i < n; i++){
             String name = "a" + i;
-            double mass = Math.random()*1e40 + 1e30; //min = mass of earths moon
-            double radius = (Math.random()*6371e3) + 1737.5; // max = earth , min = radius of earths moon
+            int hochzahl = (int) (10 * Math.random());
+            //double mass = Math.random()*1e40 + 1e30; //min = mass of earths moon
+            double mass = Math.random() * masses[(int)Math.random()];
+            //double radius = (Math.random()*6371e3) + 1737.5; // max = earth , min = radius of earths moon
+            double radius = radii[(int) Math.random()];
             Vector3 position = new Vector3(
                     ((Math.random()*Diameter)-(Diameter/2)) * Math.pow(Math.random(),1.1),
                     ((Math.random()*Diameter)-(Diameter/2)) * Math.pow(Math.random(),1.1),
                     ((Math.random()*Diameter)-(Diameter/2)) * Math.pow(Math.random(),1.1));
+            /*Vector3 currentMovement = new Vector3(
+                    ((Math.random()*30000 - 30000/2)),
+                    ((Math.random()*30000 - 30000/2)),
+                    ((Math.random()*30000 - 30000/2)));*/
             Vector3 currentMovement = new Vector3(
-                    ((Math.random()*300000 - 300000/2)),
-                    ((Math.random()*300000 - 300000/2)),
-                    ((Math.random()*300000 - 300000/2)));
+                    movements[((int) Math.random()) % 2],
+                    movements[((int) Math.random()) % 2],
+                    movements[((int) Math.random()) % 2]);
             bodies[i] = new Body(name, mass, radius, position, currentMovement, StdDraw.LIGHT_GRAY);
 
         }
@@ -106,6 +116,7 @@ public class Simulation {
                 }
                 // show new positions
                 StdDraw.show();
+                System.out.println("show movement");
             }
         }
     }
