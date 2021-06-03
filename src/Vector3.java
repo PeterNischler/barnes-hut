@@ -53,6 +53,10 @@ public class Vector3 {
         return result;
     }
 
+    public Vector3 divideBy(double d){
+        return times(1/d);
+    }
+
     // Returns the Euclidean distance of this vector
     // to the specified vector 'v'.
     public double distanceTo(Vector3 v) {
@@ -89,7 +93,10 @@ public class Vector3 {
     // Returns the coordinates of this vector in brackets as a string
     // in the form "[x,y,z]", e.g., "[1.48E11,0.0,0.0]".
     public String toString() {
-        return "[" + Double.toString(this.x) + "," + Double.toString(this.y) + "," + Double.toString(this.z) + "]";
+        //converted to  astronomical units
+        return "[" + Double.toString(this.x/Simulation.AU) + "AU, "
+                + Double.toString(this.y/Simulation.AU) + "AU, "
+                + Double.toString(this.z/Simulation.AU) + "AU] ";
     }
 
     public double getX (){

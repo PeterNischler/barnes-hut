@@ -151,14 +151,13 @@ public class OctreeNode implements CosmicComponent {
     }
 
     public Vector3 calcForceOnBody(Body body) {
-        //System.out.println("new rec " +body.getName());
+        //System.out.println("new rec " + body.getName());
         Vector3 force = new Vector3();
         //iterates over all 8 nodes. if d/r<T there is no recursive call and the
         for (int i = 0; i < 8; i++) {
             if (nodes[i] != null) {
                 if (((diameter / 2) / centreNodes[i].distance(body.getMassCenter())) < Simulation.T) {
                     Vector3 v = body.gravitationalForce(nodes[i].getMass(), nodes[i].getCentre());
-                    //System.out.println( "." + v);
                     force = force.plus(v);
                 } else {
                     force = force.plus(nodes[i].calcForceOnBody(body));
@@ -167,17 +166,6 @@ public class OctreeNode implements CosmicComponent {
         }
         return force;
     }
-
-    /*public void drawTree2D() {
-        for (int i = 0; i < 8; i++) {
-            if (nodes[i] instanceof LeafNode) {
-                StdDraw.setPenColor(StdDraw.WHITE);
-                System.out.println(centreNodes[i].getX());
-                StdDraw.square(centreNodes[i].getX(), centreNodes[i].getY(), diameter / 4);
-            }
-            nodes[i].drawTree2D();
-        }
-    }*/
 
     @Override
     public double getMass() {
@@ -189,17 +177,6 @@ public class OctreeNode implements CosmicComponent {
         return centreOfMass;
     }
 
-    /*public Body getBody(String name) {
-        for (int i = 0; i < 8; i++) {
-            if (Nodes[i] != null) {
-                Body b = Nodes[i].getBody(name);
-                if (b != null) {
-                    return b;
-                }
-            }
-        }
-        return null;
-    }*/
     @Override
     public Body getBody() {
         return null;
@@ -209,11 +186,11 @@ public class OctreeNode implements CosmicComponent {
         String returnValue = "<nodeMass: " + mass + ", nodeCentreOfMass: " + centreOfMass + ";: ";
         for (int i = 0; i < 8; i++) {
             if (nodes[i] == null) {
-                returnValue = returnValue + i + "empty";
+                returnValue = returnValue + i + ":empty;\n";
             } else {
-                returnValue = returnValue + nodes[i].toString();
+                returnValue = returnValue + i + ":" + nodes[i].toString() + "; ";
             }
         }
-        return returnValue + ">";
+        return returnValue + ">\n";
     }
 }
