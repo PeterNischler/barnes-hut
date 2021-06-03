@@ -12,7 +12,7 @@ public class Simulation {
     public static final double Diameter = 50*AU;
 
     //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
-    public static final double T = 1.0;
+    public static final double T = 5.0;
 
     public static void main(String[] args) {
         Body sun = new Body("Sol", 1.989e30, 696340e3, new Vector3(0,0,0), new Vector3(0,0,0), StdDraw.YELLOW);
@@ -30,7 +30,7 @@ public class Simulation {
         bodies[3] = mercury;
         bodies[4] = mars;
 
-        double masses[] = new double[]{1e39, 1e38, 1e37, 1e36, 1e35, 1e34, 1e33, 1e32, 1e31, 1e30};
+        double masses[] = new double[]{1e35, 1e35, 1e34, 1e34, 1e33, 1e33, 1e32, 1e32, 1e31, 1e30};
         double radii[] = new double[]{1e5, 1e5, 1e5, 1e4, 1e4, 1e4, 1e4, 1e3, 1e3, 1e3};
         double movements[] = new double[]{30000, -30000};
 
