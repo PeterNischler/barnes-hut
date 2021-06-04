@@ -12,30 +12,22 @@ public class Simulation {
     public static final double Diameter = 50*AU;
 
     //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
-    public static final double T = 1.0;
+    public static final double T = 2.0;
 
     public static void main(String[] args) {
-        Body sun = new Body("Sol", 1.989e36, 696340e3, new Vector3(0,0,0), new Vector3(0,0,0), StdDraw.YELLOW);
-        Body earth = new Body("Earth", 5.972e24, 6371e3, new Vector3(148e9, 0, 0), new Vector3(0, 29.29e3, 0), StdDraw.BLUE);
-        Body mercury = new Body("Mercury", 3.301e23, 2.4397e3, new Vector3(-46.0e9, 0, 0), new Vector3(0, -47.87e3, 0), StdDraw.ORANGE);
-        Body venus = new Body("Venus",4.86747e24,6052e3,new Vector3(-1.707667e10,1.066132e11,2.450232e9),new Vector3(-34446.02,-5567.47,2181.10),StdDraw.PINK);
-        Body mars = new Body("Mars",6.41712e23,3390e3,new Vector3(-1.010178e11,-2.043939e11,-1.591727E9),new Vector3(20651.98,-10186.67,-2302.79),StdDraw.RED);
+        Body sun = new Body("Sol", 1.989e37, 696340e3, new Vector3(0,0,0), new Vector3(0,0,0), StdDraw.YELLOW);
 
-        int n = 1000; //number of bodies in simulation
+        int n = 10000; //number of bodies in simulation
         Body[] bodies = new Body[n]; //array containing all bodies in simulation
 
         bodies[0] = sun;
-        bodies[1] = earth;
-        bodies[2] = venus;
-        bodies[3] = mercury;
-        bodies[4] = mars;
 
-        double masses[] = new double[]{1e35, 1e34, 1e34, 1e33, 1e33, 1e33, 1e32, 1e32, 1e31, 1e30};
+        double masses[] = new double[]{1e36, 1e35, 1e34, 1e33, 1e33, 1e33, 1e32, 1e32, 1e31, 1e30};
         double radii[] = new double[]{1e5, 1e5, 1e5, 1e4, 1e4, 1e4, 1e4, 1e3, 1e3, 1e3};
         double movements[] = new double[]{30000, -30000};
 
         //generate random bodies and add them to the array bodies
-        for (int i = 5; i < n; i++){
+        for (int i = 1; i < n; i++){
             String name = "a" + i;
             int hochzahl = (int) (10 * Math.random());
             //double mass = Math.random()*1e40 + 1e30; //min = mass of earths moon
@@ -105,7 +97,7 @@ public class Simulation {
             }
 
             // show all movements in StdDraw canvas only every 3 hours (to speed up the simulation)
-            if (seconds%(3*3600) == 0 || seconds == 1) {
+            if (seconds%(10) == 0 || seconds == 1) {
                 // clear old positions (exclude the following line if you want to draw orbits).
                 StdDraw.clear(StdDraw.BLACK);
 
