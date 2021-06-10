@@ -12,7 +12,7 @@ public class Simulation {
     public static final double Diameter = 50*AU;
 
     //threshhold to group bodies together. d/r < T, d = diameter of group, r = distance from center of group to body
-    public static final double T = 2.0;
+    public static final double T = 1.0;
 
     public static void main(String[] args) {
         Body sun = new Body("Sol", 1.989e37, 696340e3, new Vector3(0,0,0), new Vector3(0,0,0), StdDraw.YELLOW);
