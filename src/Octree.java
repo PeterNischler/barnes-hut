@@ -81,7 +81,7 @@ public class Octree {
     }
 
     // fügt ein Array an bodies auf einmal hinzu
-    public void add2(Body[] bodies) {
+    /*public void add2(Body[] bodies) {
         // noch gescheiter wäre es eine array zu machen, welches dann nach xyz sortiert wird, sodass man das array einfach immer entsprechend der position teilen muss
         BodyStack cube0 = new BodyStack();
         BodyStack cube1 = new BodyStack();
@@ -134,7 +134,7 @@ public class Octree {
                 nodes[i].add(cubes[i]);
             }
         }
-    }
+    }*/
 
     //returns vector of force exerted by all other bodies on the input body
     public Vector3 calcForceOnBody(Body body) {

@@ -88,7 +88,7 @@ public class OctreeNode implements CosmicComponent {
         return returnValue;
     }
 
-    public void add(BodyStack bodies) {
+    /*public void add(BodyStack bodies) {
         // noch gescheiter wäre es eine array zu machen, welches dann nach xyz sortiert wird, sodass man das array einfach immer entsprechend der position teilen muss
         BodyStack[] cubes = new BodyStack[8];
 
@@ -133,7 +133,7 @@ public class OctreeNode implements CosmicComponent {
                 nodes[i].add(cubes[i]);
             }
         }
-    }
+    }*/
 
 
     // calculates new Mass of the OctreeNode after a body was added
