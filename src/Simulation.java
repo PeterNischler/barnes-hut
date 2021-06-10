@@ -30,6 +30,7 @@ public class Simulation {
         bodies[3] = mercury;
         bodies[4] = mars;
 
+        //double masses[] = new double[]{1e34, 1e34, 1e34, 1e35, 1e35, 1e35, 1e36, 1e37, 1e37, 1e37};
         double masses[] = new double[]{1e35, 1e34, 1e34, 1e33, 1e33, 1e33, 1e32, 1e32, 1e31, 1e30};
         double radii[] = new double[]{1e5, 1e5, 1e5, 1e4, 1e4, 1e4, 1e4, 1e3, 1e3, 1e3};
         double movements[] = new double[]{30000, -30000};
@@ -87,10 +88,12 @@ public class Simulation {
                 }
             }
 
+            System.out.println(system.getDepth());
             // calc force on bodies and save result in body
             for (int i = 0; i < n; i++){
                 if (bodies[i] != null){
                     bodies[i].setForce(system.calcForceOnBody(bodies[i]));
+
                 }
             }
 
@@ -100,12 +103,14 @@ public class Simulation {
             // for each body (with index i): move it according to the total force exerted on it.
             for (int i = 0; i < n; i++){
                 if (bodies[i] != null) {
-                    bodies[i].move();
+                    if (!bodies[i].getName().equals("Sol")){
+                        bodies[i].move();
+                    }
                 }
             }
 
             // show all movements in StdDraw canvas only every 3 hours (to speed up the simulation)
-            if (seconds%(3*3600) == 0 || seconds == 1) {
+            if (seconds%(100) == 0 || seconds == 1) {
                 // clear old positions (exclude the following line if you want to draw orbits).
                 StdDraw.clear(StdDraw.BLACK);
 

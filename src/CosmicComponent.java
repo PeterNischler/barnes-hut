@@ -15,4 +15,6 @@ public interface CosmicComponent {
 
    public String toString();
 
+   public int getDepth();
+
 }

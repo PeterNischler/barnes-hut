@@ -193,4 +193,17 @@ public class OctreeNode implements CosmicComponent {
         }
         return returnValue + ">\n";
     }
+
+    public int getDepth(){
+        int depth = 0;
+        for (int i = 0; i < 8; i++){
+            if (nodes[i] != null){
+                int depthNode = nodes[i].getDepth() + 1;
+                if(depthNode > depth){
+                    depth = depthNode;
+                }
+            }
+        }
+        return depth;
+    }
 }

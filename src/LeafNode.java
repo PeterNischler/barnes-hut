@@ -44,4 +44,8 @@ public class LeafNode implements  CosmicComponent{
     }
 
     public String toString() { return body.toString();}
+
+    public int getDepth(){
+        return 1;
+    }
 }

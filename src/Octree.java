@@ -175,4 +175,19 @@ public class Octree {
         return returnValue + ">";
     }
 
+
+    //calculates the depth of the octree
+    public int getDepth(){
+        int depth = 0;
+        for (int i = 0; i < 8; i++){
+            if (nodes[i] != null){
+                int depthNode = nodes[i].getDepth();
+                if(depthNode > depth){
+                    depth = depthNode;
+                }
+            }
+        }
+        return depth;
+    }
+
 }
